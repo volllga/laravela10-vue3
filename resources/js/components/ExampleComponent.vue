@@ -7,11 +7,23 @@
 
                     <div class="card-body">
                         <h4 class="text-body-emphasis">
-                            Hello <mark>{{ name }}</mark>!
+                            Hello
+                            <mark>{{ name }}</mark>
+                            !
                             <br>
-                            Nice to meet you in <mark>{{ cities.residence }}</mark>
+                            Nice to meet you in
+                            <mark>{{ cities.residence }}</mark>
                         </h4>
                         I'm an example component.
+                        <div class="row row-cols-lg-auto g-3 align-items-center">
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-primary" @click="sayHello(name)">Hello</button>
+                            </div>
+
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-primary" @click="sayHi(name)">Hi</button>
+                            </div>
+                        </div>
                     </div>
                     <CounterComponent></CounterComponent>
                 </div>
@@ -42,7 +54,15 @@ export default {
             numbers: [1, 2, 3],
         }
     },
-}
 
+    methods: {
+        sayHello(name) {
+            alert(`Hello ${name}`);
+        },
+        sayHi(name) {
+            alert(`Hi ${name}`);
+        }
+    }
+}
 
 </script>
