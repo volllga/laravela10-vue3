@@ -8,6 +8,9 @@ https://eugenkiss.github.io/7guis/tasks/#counter
 
 <script setup>
 import { ref } from 'vue'
+// export default {
+//     name: 'CounterComponent',
+// }
 
 const count = ref(0)
 </script>
