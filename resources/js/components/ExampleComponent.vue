@@ -8,6 +8,7 @@
                     <div class="card-body">
                         I'm an example component.
                     </div>
+                    <CounterComponent></CounterComponent>
                 </div>
             </div>
         </div>
@@ -15,9 +16,11 @@
 </template>
 
 <script>
+import CounterComponent from './CounterComponent.vue';
     export default {
-        mounted() {
-            console.log('Component mounted.')
+
+        components: {
+            CounterComponent,
         }
     }
 </script>
