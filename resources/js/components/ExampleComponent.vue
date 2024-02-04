@@ -8,20 +8,20 @@
                     <div class="card-body">
                         <h4 class="text-body-emphasis">
                             Hello
-                            <mark>{{ name }}</mark>
-                            !
+                            <mark>{{ name }}</mark>!
                             <br>
                             Nice to meet you in
                             <mark>{{ cities.residence }}</mark>
                         </h4>
+                        <h4>{{ born }}</h4>
                         I'm an example component.
                         <div class="row row-cols-lg-auto g-3 align-items-center">
                             <div class="col-auto">
-                                <button type="button" class="btn btn-primary" @click="sayHello(name)">Hello</button>
+                                <button type="button" class="btn btn-primary" @click="sayHello">Hello</button>
                             </div>
 
                             <div class="col-auto">
-                                <button type="button" class="btn btn-primary" @click="sayHi(name)">Hi</button>
+                                <button type="button" class="btn btn-primary" @click="sayHi">Hi</button>
                             </div>
                         </div>
                     </div>
@@ -55,12 +55,19 @@ export default {
         }
     },
 
+    computed: {
+        born() {
+            return `${this.name} was born in ${this.cities.homeCity}`;
+        }
+    },
+
+
     methods: {
-        sayHello(name) {
-            alert(`Hello ${name}`);
+        sayHello() {
+            alert(`Hello ${this.name}`);
         },
-        sayHi(name) {
-            alert(`Hi ${name}`);
+        sayHi() {
+            alert(`Hi ${this.name}`);
         }
     }
 }
