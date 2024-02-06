@@ -12,8 +12,8 @@
         </thead>
         <tbody>
         <template
-            v-for="person in active"
-            :key="person.id">
+            v-for="user in active"
+            :key="user.id">
 <!--            Для тех, у кого ругается на строку  <tr v-for="person in persons" v-if="person.age >20">-->
 <!--            Из документации к vue 3:-->
 <!--            Обратите внимание, не рекомендуется использовать вместе v-if и v-for.-->
@@ -27,11 +27,11 @@
 <!--                </tr>-->
 <!--            </template>-->
             <tr>
-                <th scope="row">{{ person.id }}</th>
-                <td>{{ person.name }}</td>
-                <td>{{ person.age }}</td>
-                <td>{{ person.position }}</td>
-                <td>{{ person.active }}</td>
+                <th scope="row">{{ user.id }}</th>
+                <td>{{ user.name }}</td>
+                <td>{{ user.age }}</td>
+                <td>{{ user.position }}</td>
+                <td>{{ user.active }}</td>
             </tr>
         </template>
         </tbody>
@@ -47,47 +47,32 @@ export default {
     components: {},
 
     data() {
-        return {
-            persons: [
-                {
-                    id: 1,
-                    name: 'Tom',
-                    age: 34,
-                    position: 'QA',
-                    active: 1,
-                },
-                {
-                    id: 2,
-                    name: 'Ira',
-                    age: 44,
-                    position: 'SEO',
-                    active: 1,
-                },
-                {
-                    id: 3,
-                    name: 'Rick',
-                    age: 29,
-                    position: 'Developer',
-                    active: 1,
-                },
-                {
-                    id: 4,
-                    name: 'Martin',
-                    age: 52,
-                    position: 'Developer',
-                    active: 0,
-                },
-            ]
-        }
     },
 
     computed: {
         active() {
-            return this.persons.filter((person) => person.active === 1);
+            return this.users.filter((user) => user.active === 1);
         }
     },
+    mounted() {
+        this.getActiveUsers()
+    },
 
-    methods: {}
+    methods: {
+        getActiveUsers()
+        {
+            axios.get('users')
+                .then((response) => {
+                    console.log(response)
+                    this.users = response.data
+                })
+                .catch((error) => {
+                    console.log(error)
+
+                })
+                .finally()
+        }
+    }
 }
 
 </script>
