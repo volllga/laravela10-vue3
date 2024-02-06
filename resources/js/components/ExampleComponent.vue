@@ -14,7 +14,6 @@
                             <mark>{{ cities.residence }}</mark>
                         </h4>
                         <h4>{{ born }}</h4>
-                        I'm an example component.
                         <div class="row row-cols-lg-auto g-3 align-items-center">
                             <div class="col-auto">
                                 <button type="button" class="btn btn-primary" @click="sayHello">Hello</button>
@@ -30,15 +29,20 @@
             </div>
         </div>
     </div>
+    <div class="container p-5">
+        <TableComponent></TableComponent>
+    </div>
 </template>
 
 <script>
 import CounterComponent from './CounterComponent.vue';
+import TableComponent from "@/components/TableComponent.vue";
 
 export default {
     name: 'ExampleComponent',
 
     components: {
+        TableComponent,
         CounterComponent,
     },
 
