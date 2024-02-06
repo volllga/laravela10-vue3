@@ -47,6 +47,9 @@ export default {
     components: {},
 
     data() {
+        return {
+            users: null
+        }
     },
 
     computed: {
@@ -62,15 +65,16 @@ export default {
         getActiveUsers()
         {
             axios.get('users')
-                .then((response) => {
-                    console.log(response)
-                    this.users = response.data
+                .then((data) => {
+                    // console.log(data.data)
+                    this.users = data.data
+                    // console.log(this.users)
                 })
-                .catch((error) => {
-                    console.log(error)
-
-                })
-                .finally()
+                // .catch((error) => {
+                //     console.log(error)
+                //
+                // })
+                // .finally()
         }
     }
 }
