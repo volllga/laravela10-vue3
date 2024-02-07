@@ -1,43 +1,36 @@
 <template>
     <div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Age</th>
-            <th scope="col">Position</th>
-            <th scope="col">Active</th>
-        </tr>
-        </thead>
-        <tbody>
-        <template
-            v-for="user in active"
-            :key="user.id">
-<!--            Для тех, у кого ругается на строку  <tr v-for="person in persons" v-if="person.age >20">-->
-<!--            Из документации к vue 3:-->
-<!--            Обратите внимание, не рекомендуется использовать вместе v-if и v-for.-->
-<!--            Когда они указаны вместе на одном узле, у v-if будет больший приоритет, чем у v-for. -->
-<!--            И поэтому в условии v-if не будет доступа к переменным из области видимости v-for-->
-<!--            Необходимо разнести эти v-for и v-if по разным узлам, например так:-->
-
-<!--            <template v-for="person in persons">-->
-<!--                <tr v-if="person.age > 20">-->
-<!--                    ...-->
-<!--                </tr>-->
-<!--            </template>-->
+        <table class="table" v-if="users !== null">
+            <thead>
             <tr>
-                <th scope="row">{{ user.id }}</th>
-                <td>{{ user.name }}</td>
-                <td>{{ user.age }}</td>
-                <td>{{ user.position }}</td>
-                <td>{{ user.active }}</td>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Age</th>
+                <th scope="col">Position</th>
+                <th scope="col">Active</th>
             </tr>
-        </template>
-        </tbody>
-    </table>
+            </thead>
+            <tbody v-if="users && users.length">
+            <template v-for="user in activeUsers" :key="user.id">
+                <tr>
+                    <th scope="row">{{ user.id }}</th>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.age }}</td>
+                    <td>{{ user.position }}</td>
+                    <td>{{ user.active }}</td>
+                </tr>
+            </template>
+            </tbody>
+        </table>
+        <div v-else-if="true">
+            Loading...
+        </div>
+        <div v-else>
+            No active users found.
+        </div>
     </div>
 </template>
+
 
 <script>
 
@@ -48,33 +41,30 @@ export default {
 
     data() {
         return {
-            users: null
-        }
+            users: [],
+        };
     },
 
     computed: {
-        active() {
+        activeUsers() {
             return this.users.filter((user) => user.active === 1);
         }
     },
+
     mounted() {
-        this.getActiveUsers()
+        this.getUsers()
     },
 
     methods: {
-        getActiveUsers()
-        {
+        getUsers() {
             axios.get('users')
-                .then((data) => {
-                    // console.log(data.data)
-                    this.users = data.data
-                    // console.log(this.users)
+                .then((response) => {
+                    this.users = response.data;
+                    console.log(this.users);
                 })
-                // .catch((error) => {
-                //     console.log(error)
-                //
-                // })
-                // .finally()
+                .catch((error) => {
+                    console.error('Error fetching users:', error);
+                });
         }
     }
 }
