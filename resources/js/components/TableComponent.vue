@@ -1,23 +1,22 @@
 <template>
+    <CreateComponent></CreateComponent>
     <div>
-        <table class="table" v-if="users !== null">
+        <table class="table" v-if="items !== null">
             <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Age</th>
-                <th scope="col">Position</th>
+                <th scope="col">ID</th>
+                <th scope="col">Category Name</th>
                 <th scope="col">Active</th>
+                <th scope="col">Created at</th>
             </tr>
             </thead>
-            <tbody v-if="users && users.length">
-            <template v-for="user in activeUsers" :key="user.id">
+            <tbody v-if="items && items.length">
+            <template v-for="item in active" :key="item.id">
                 <tr>
-                    <th scope="row">{{ user.id }}</th>
-                    <td>{{ user.name }}</td>
-                    <td>{{ user.age }}</td>
-                    <td>{{ user.position }}</td>
-                    <td>{{ user.active }}</td>
+                    <th scope="row">{{ item.id }}</th>
+                    <td>{{ item.category_name }}</td>
+                    <td>{{ item.active }}</td>
+                    <td>{{ item.created_at }}</td>
                 </tr>
             </template>
             </tbody>
@@ -33,37 +32,40 @@
 
 
 <script>
+import CreateComponent from "@/components/CreateComponent.vue";
 
 export default {
     name: 'TableComponent',
 
-    components: {},
+    components: {
+        CreateComponent,
+    },
 
     data() {
         return {
-            users: [],
+            items: [],
         };
     },
 
     computed: {
-        activeUsers() {
-            return this.users.filter((user) => user.active === 1);
+        active() {
+            return this.items.filter((item) => item.active === 1);
         }
     },
 
     mounted() {
-        this.getUsers()
+        this.getItems()
     },
 
     methods: {
-        getUsers() {
-            axios.get('users')
+        getItems() {
+            axios.get('api/categories')
                 .then((response) => {
-                    this.users = response.data;
-                    console.log(this.users);
+                    this.items = response.data;
+                    console.log(this.items);
                 })
                 .catch((error) => {
-                    console.error('Error fetching users:', error);
+                    console.error('Error fetching items:', error);
                 });
         }
     }
