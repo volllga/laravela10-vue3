@@ -62,7 +62,7 @@ export default {
             axios.get('api/categories')
                 .then((response) => {
                     this.items = response.data;
-                    console.log(this.items);
+                    //console.log(this.items);
                 })
                 .catch((error) => {
                     console.error('Error fetching items:', error);

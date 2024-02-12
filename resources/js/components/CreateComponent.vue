@@ -70,7 +70,7 @@ export default {
 
     methods: {
         create() {
-            axios.post("/laravel10-vue3/public/api/categories", {
+            axios.post("api/categories", {
                 category_name: this.categoryName,
                 category_description: this.categoryDescription,
                 active: this.active,
