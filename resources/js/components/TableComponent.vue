@@ -6,20 +6,24 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Category Name</th>
+                <th scope="col">Category Description</th>
                 <th scope="col">Active</th>
                 <th scope="col">Created at</th>
+                <th scope="col">Updated at</th>
                 <th scope="col">Actions</th>
             </tr>
             </thead>
             <tbody v-if="items && items.length">
-            <template v-for="item in active" :key="item.id">
-                <tr>
+            <template v-for="item in activeItems" :key="item.id">
+                <tr :class="isEdit(item.id) ? 'd-none' : ''">
                     <th scope="row">{{ item.id }}</th>
                     <td>{{ item.category_name }}</td>
+                    <td>{{ item.category_description }}</td>
                     <td>{{ item.active }}</td>
                     <td>{{ item.created_at }}</td>
+                    <td>{{ item.updated_at }}</td>
                     <td>
-                        <a href="#" class="btn btn-outline-primary btn-sm" @click.prevent="setItemId(item.id)">
+                        <a href="#" class="btn btn-outline-primary btn-sm" @click.prevent="edit(item.id, item.category_name, item.category_description, item.active)">
                             <EditAction />
                         </a>
                         <span v-if="true">&nbsp;</span>
@@ -31,11 +35,13 @@
                 </tr>
                 <tr :class="isEdit(item.id) ? '' : 'd-none'">
                     <th scope="row">{{ item.id }}</th>
-                    <td><input type="text" class="form-control"></td>
-                    <td><input type="checkbox" class="form-check-input">&nbsp Active</td>
+                    <td><input type="text"  v-model="categoryName" class="form-control"></td>
+                    <td><input type="text"  v-model="categoryDescription" class="form-control" :disabled="!isAllowEdit"></td>
+                    <td><input type="checkbox" v-model="active" class="form-check-input" :checked="active">&nbsp Active</td>
+                    <td></td>
                     <td></td>
                     <td>
-                        <a href="#" class="btn btn-success btn-sm" @click.prevent="setItemId(null)">Update</a>
+                        <a href="#" class="btn btn-success btn-sm" @click.prevent="update(item.id)">Update</a>
 
                     </td>
 
@@ -71,13 +77,20 @@ export default {
         return {
             items: [],
             editItemId: null,
+            categoryName: '',
+            categoryDescription: '',
+            active: true,
         };
     },
 
     computed: {
-        active() {
+        activeItems() {
             return this.items.filter((item) => item.active === 1)
-        }
+        },
+
+        isAllowEdit() {
+            return false;
+        },
     },
 
     mounted() {
@@ -96,16 +109,41 @@ export default {
                 });
         },
 
-        setItemId(id) {
+        edit(id, name, description, active) {
             this.editItemId = id
+            this.categoryName = name
+            this.categoryDescription = description
+            this.active = active
+        },
+
+        update(id) {
+            this.editItemId = null
+            axios.patch(`api/categories/${id}`, {
+                category_name: this.categoryName,
+                category_description: this.categoryDescription,
+                active: this.active,
+            })
+                .then((response) => {
+                    this.getItems()
+                    alert("Category updated successfully!")
+
+                })
+                .catch((error) => {
+                    console.error(error);
+
+                    if (error.response && error.response.status === 422) {
+
+                        const validationErrors = error.response.data.errors
+                        console.error(validationErrors)
+                    } else {
+                        alert("Failed to update category. Please try again.")
+                    }
+                });
         },
 
         isEdit(id) {
             return this.editItemId === id
-        }
+        },
     },
-
-
 }
-
 </script>

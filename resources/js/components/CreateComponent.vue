@@ -55,9 +55,9 @@ export default {
 
     data() {
         return {
-            'categoryName': null,
-            'categoryDescription': null,
-            'active': true,
+            categoryName: '',
+            categoryDescription: '',
+            active: true,
         }
     },
 

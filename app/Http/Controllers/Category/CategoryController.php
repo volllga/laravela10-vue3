@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Category;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Category\StoreCategory;
+use App\Http\Requests\Category\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -19,7 +19,7 @@ class CategoryController extends Controller
 //        return view('categories.create');
 //    }
 //
-    public function store(StoreCategory $request)
+    public function store(CategoryRequest $request)
     {
         // Validation has passed, create the category
 
@@ -36,14 +36,13 @@ class CategoryController extends Controller
 //        return view('categories.edit', compact('category'));
 //    }
 //
-//    public function update(StoreCategory $request, Category $category)
-//    {
-//        // Validation has passed, update the category
-//        $category->update($request->validated());
-//
-//        return redirect()->route('categories.index')
-//            ->with('success', 'Category updated successfully');
-//    }
+    public function update(CategoryRequest $request, Category $category)
+    {
+        // Validation has passed, update the category
+        $category->update($request->validated());
+
+        return $category;
+    }
 //
 //    public function destroy(Category $category)
 //    {
