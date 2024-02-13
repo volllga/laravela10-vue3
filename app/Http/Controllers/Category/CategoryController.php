@@ -43,12 +43,11 @@ class CategoryController extends Controller
 
         return $category;
     }
-//
-//    public function destroy(Category $category)
-//    {
-//        $category->delete();
-//
-//        return redirect()->route('categories.index')
-//            ->with('success', 'Category deleted successfully');
-//    }
+
+    public function destroy(Category $category)
+    {
+        $category->delete();
+
+        return response()->json(['message' => 'Resource deleted successfully'], 204);
+    }
 }

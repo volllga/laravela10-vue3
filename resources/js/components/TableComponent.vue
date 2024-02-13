@@ -1,7 +1,7 @@
 <template>
     <CreateComponent></CreateComponent>
     <div>
-        <table class="table" v-if="items !== null">
+        <table class="table table-hover" v-if="items !== null">
             <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -10,7 +10,7 @@
                 <th scope="col">Active</th>
                 <th scope="col">Created at</th>
                 <th scope="col">Updated at</th>
-                <th scope="col">Actions</th>
+                <th scope="col" style="width: 120px">Actions</th>
             </tr>
             </thead>
             <tbody v-if="items && items.length">
@@ -27,7 +27,7 @@
                             <EditAction />
                         </a>
                         <span v-if="true">&nbsp;</span>
-                        <a href="{{ $deleteRoute }}" class="btn btn-outline-danger btn-sm">
+                        <a href="#" class="btn btn-outline-danger btn-sm" @click.prevent="destroy(item.id)">
                             <DeleteAction />
                         </a>
                     </td>
@@ -41,8 +41,10 @@
                     <td></td>
                     <td></td>
                     <td>
-                        <a href="#" class="btn btn-success btn-sm" @click.prevent="update(item.id)">Update</a>
-
+                        <a href="#" class="btn btn-success btn-sm" @click.prevent="update(item.id)">Save</a>&nbsp
+                        <a href="#" class="btn btn-secondary btn-sm" @click.prevent="closeForm()">
+                            <CloseAction />
+                        </a>
                     </td>
 
                 </tr>
@@ -63,6 +65,7 @@
 import CreateComponent from "@/components/CreateComponent.vue";
 import EditAction from "@/components/actions/EditAction.vue";
 import DeleteAction from "@/components/actions/DeleteAction.vue";
+import CloseAction from "@/components/actions/CloseAction.vue";
 
 export default {
     name: 'TableComponent',
@@ -71,6 +74,7 @@ export default {
         CreateComponent,
         EditAction,
         DeleteAction,
+        CloseAction,
     },
 
     data() {
@@ -141,8 +145,34 @@ export default {
                 });
         },
 
+        destroy(id) {
+            this.editItemId = null
+            axios.delete(`api/categories/${id}`, {
+            })
+                .then((response) => {
+                    this.getItems()
+                    alert("Category deleted successfully!")
+
+                })
+                .catch((error) => {
+                    console.error(error);
+
+                    if (error.response && error.response.status === 422) {
+
+                        const validationErrors = error.response.data.errors
+                        console.error(validationErrors)
+                    } else {
+                        alert("Failed to delete category. Please try again.")
+                    }
+                });
+        },
+
         isEdit(id) {
             return this.editItemId === id
+        },
+
+        closeForm() {
+            this.editItemId = null
         },
     },
 }
