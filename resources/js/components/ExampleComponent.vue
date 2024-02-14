@@ -30,7 +30,7 @@
         </div>
     </div>
     <div class="container p-5">
-        <TableComponent></TableComponent>
+        <TableComponent ref="table"></TableComponent>
     </div>
 </template>
 
@@ -59,6 +59,10 @@ export default {
         }
     },
 
+    mounted() {
+        this.$refs.table.tableLog();
+    },
+
     computed: {
         born() {
             return `${this.name} was born in ${this.cities.homeCity}`;
@@ -70,8 +74,13 @@ export default {
         sayHello() {
             alert(`Hello ${this.name}`);
         },
+
         sayHi() {
             alert(`Hi ${this.name}`);
+        },
+
+        exampleLog() {
+            console.log('this is example component');
         }
     }
 }

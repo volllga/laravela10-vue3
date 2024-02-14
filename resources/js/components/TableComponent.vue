@@ -99,6 +99,7 @@ export default {
 
     mounted() {
         this.getItems()
+        this.$parent.exampleLog();
     },
 
     methods: {
@@ -174,6 +175,10 @@ export default {
         closeForm() {
             this.editItemId = null
         },
+
+        tableLog() {
+            console.log('this is table component');
+        }
     },
 }
 </script>
