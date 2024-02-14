@@ -7,6 +7,10 @@
 <script>
 export default {
 
+    mounted() {
+
+    },
+
     name: 'DeleteAction',
 
     methods: {
