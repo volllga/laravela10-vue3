@@ -30,6 +30,9 @@
         </div>
     </div>
     <div class="container p-5">
+        <SomeComponent :obj="obj"></SomeComponent>
+    </div>
+    <div class="container p-5">
         <TableComponent ref="table"></TableComponent>
     </div>
 </template>
@@ -37,11 +40,13 @@
 <script>
 import CounterComponent from './CounterComponent.vue';
 import TableComponent from "@/components/TableComponent.vue";
+import SomeComponent from "@/components/SomeComponent.vue";
 
 export default {
     name: 'ExampleComponent',
 
     components: {
+        SomeComponent,
         TableComponent,
         CounterComponent,
     },
@@ -56,6 +61,11 @@ export default {
                 residence: 'Prague',
             },
             numbers: [1, 2, 3],
+            obj: {
+                color: 'red',
+                number: 20,
+                active: false,
+            }
         }
     },
 

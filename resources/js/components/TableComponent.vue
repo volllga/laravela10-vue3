@@ -51,7 +51,7 @@
             </template>
             </tbody>
         </table>
-        <div v-else-if="true">
+        <div v-else-if="!items">
             Loading...
         </div>
         <div v-else>
@@ -62,6 +62,7 @@
 
 
 <script>
+import axios from 'axios';
 import CreateComponent from "@/components/CreateComponent.vue";
 import EditAction from "@/components/actions/EditAction.vue";
 import DeleteAction from "@/components/actions/DeleteAction.vue";
