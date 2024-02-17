@@ -74,7 +74,6 @@ export default {
 
     methods: {
         create() {
-            console.log()
             axios.post("api/categories", {
                 category_name: this.categoryName,
                 category_description: this.categoryDescription,
@@ -84,7 +83,7 @@ export default {
                     this.categoryName = ''
                     this.categoryDescription = ''
                     this.active = true
-                    this.$parent.$refs.table.getItems()
+                    this.$parent.$refs.categories.getItems()
 
                 })
                 .catch((error) => {

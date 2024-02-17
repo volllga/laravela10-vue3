@@ -73,7 +73,6 @@ export default {
     },
 
     mounted() {
-        this.$refs.categories.tableLog();
     },
 
     computed: {
@@ -95,10 +94,6 @@ export default {
         sayHi() {
             alert(`Hi ${this.name}`);
         },
-
-        exampleLog() {
-            console.log('this is example component');
-        }
     }
 }
 

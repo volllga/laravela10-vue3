@@ -3,7 +3,8 @@
     <tr :class="this.$parent.isEdit(item.id) ? '' : 'd-none'">
         <th scope="row">{{ item.id }}</th>
         <td><input type="text" v-model="categoryName" class="form-control"></td>
-        <td><input type="text" v-model="categoryDescription" class="form-control" :disabled="!this.$parent.$parent.isAllowEditDescription">
+        <td><input type="text" v-model="categoryDescription" class="form-control"
+                   :disabled="!this.$parent.$parent.isAllowEditDescription">
         </td>
         <td><input type="checkbox" v-model="active" class="form-check-input" :checked="active">&nbsp Active</td>
         <td></td>
