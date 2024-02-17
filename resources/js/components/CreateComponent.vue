@@ -25,7 +25,7 @@
                                 v-model="categoryDescription"
                                 id="category_description"
                                 placeholder="Category Description"
-                                :disabled="!isAllowEdit"
+                                :disabled="!this.$parent.isAllowEditDescription"
                             />
                         </div>
 
@@ -50,11 +50,17 @@
 </template>
 
 <script>
+
+import axios from 'axios'
+
 export default {
     name: "CreateComponent",
 
+
+
     data() {
         return {
+            validationErrors: null,
             categoryName: '',
             categoryDescription: '',
             active: true,
@@ -63,37 +69,35 @@ export default {
 
     computed: {
 
-        isAllowEdit() {
-            return false;
-        },
+
     },
 
     methods: {
         create() {
+            console.log()
             axios.post("api/categories", {
                 category_name: this.categoryName,
                 category_description: this.categoryDescription,
                 active: this.active,
             })
                 .then((response) => {
-                    this.categoryName = null;
-                    this.categoryDescription = null;
-                    this.active = true;
+                    this.categoryName = ''
+                    this.categoryDescription = ''
+                    this.active = true
+                    this.$parent.$refs.table.getItems()
 
-                    alert("Category created successfully!");
                 })
                 .catch((error) => {
                     console.error(error);
 
                     if (error.response && error.response.status === 422) {
-
-                        const validationErrors = error.response.data.errors;
-                        console.error(validationErrors);
+                        this.validationErrors = error.response.data.errors;
                     } else {
-                        alert("Failed to create category. Please try again.");
+                        alert("Failed to create category. Please try again.")
                     }
-                });
+                })
         },
+
     },
 }
 </script>

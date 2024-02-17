@@ -16,12 +16,12 @@ class CategoriesTableSeeder extends Seeder
         $currentTimestamp = now();
 
         $categories = [
-            ['category_name' => 'GENERAL', 'category_description' => 'test', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['category_name' => 'POSTMAN', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['category_name' => 'SQL', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['category_name' => 'GIT', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['category_name' => 'DEV TOOLS', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
-            ['category_name' => 'HTTP', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['active' => 1, 'category_name' => 'GENERAL', 'category_description' => 'test', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['active' => 1, 'category_name' => 'POSTMAN',  'category_description' => 'test 2', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['active' => 1, 'category_name' => 'SQL', 'category_description' => 'test', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['active' => 1, 'category_name' => 'GIT', 'category_description' => null, 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['active' => 1, 'category_name' => 'DEV TOOLS', 'category_description' => 'test 3', 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
+            ['active' => 1, 'category_name' => 'HTTP', 'category_description' => null, 'created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp],
         ];
 
         DB::table('categories')->insert($categories);

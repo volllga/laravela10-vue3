@@ -22,8 +22,14 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         // Validation has passed, create the category
-
-        return Category::create($request->validated());
+        try {
+            dump($request->validated());
+            $category = Category::create($request->validated());
+            return $category;
+        } catch (\Exception $e) {
+            // Handle any exception that might occur during category creation
+            return response()->json(['error' => 'Failed to create category'], 500);
+        }
     }
 //
 //    public function show(Category $category)
@@ -39,9 +45,13 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, Category $category)
     {
         // Validation has passed, update the category
-        $category->update($request->validated());
-
-        return $category;
+        try {
+            $category->update($request->validated());
+            return $category;
+        } catch (\Exception $e) {
+            // Handle any exception that might occur during category update
+            return response()->json(['error' => 'Failed to update category'], 500);
+        }
     }
 
     public function destroy(Category $category)

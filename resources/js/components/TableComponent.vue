@@ -1,5 +1,5 @@
 <template>
-    <CreateComponent></CreateComponent>
+    <div class="container p-5">
     <div>
         <table class="table table-hover" v-if="items !== null">
             <thead>
@@ -33,21 +33,22 @@
                     </td>
 
                 </tr>
-                <tr :class="isEdit(item.id) ? '' : 'd-none'">
-                    <th scope="row">{{ item.id }}</th>
-                    <td><input type="text"  v-model="categoryName" class="form-control"></td>
-                    <td><input type="text"  v-model="categoryDescription" class="form-control" :disabled="!isAllowEdit"></td>
-                    <td><input type="checkbox" v-model="active" class="form-check-input" :checked="active">&nbsp Active</td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <a href="#" class="btn btn-success btn-sm" @click.prevent="update(item.id)">Save</a>&nbsp
-                        <a href="#" class="btn btn-secondary btn-sm" @click.prevent="closeForm()">
-                            <CloseAction />
-                        </a>
-                    </td>
+<!--                <tr :class="isEdit(item.id) ? '' : 'd-none'">-->
+<!--                    <th scope="row">{{ item.id }}</th>-->
+<!--                    <td><input type="text"  v-model="categoryName" class="form-control"></td>-->
+<!--                    <td><input type="text"  v-model="categoryDescription" class="form-control" :disabled="!isAllowEdit"></td>-->
+<!--                    <td><input type="checkbox" v-model="active" class="form-check-input" :checked="active">&nbsp Active</td>-->
+<!--                    <td></td>-->
+<!--                    <td></td>-->
+<!--                    <td>-->
+<!--                        <a href="#" class="btn btn-success btn-sm" @click.prevent="update(item.id)">Save</a>&nbsp-->
+<!--                        <a href="#" class="btn btn-secondary btn-sm" @click.prevent="closeForm()">-->
+<!--                            <CloseAction />-->
+<!--                        </a>-->
+<!--                    </td>-->
 
-                </tr>
+<!--                </tr>-->
+                <EditComponent :item="item" :ref="`${item.id}`"></EditComponent>
             </template>
             </tbody>
         </table>
@@ -58,6 +59,7 @@
             No active users found.
         </div>
     </div>
+    </div>
 </template>
 
 
@@ -66,7 +68,7 @@ import axios from 'axios';
 import CreateComponent from "@/components/CreateComponent.vue";
 import EditAction from "@/components/actions/EditAction.vue";
 import DeleteAction from "@/components/actions/DeleteAction.vue";
-import CloseAction from "@/components/actions/CloseAction.vue";
+import EditComponent from "@/components/EditComponent.vue";
 
 export default {
     name: 'TableComponent',
@@ -75,7 +77,7 @@ export default {
         CreateComponent,
         EditAction,
         DeleteAction,
-        CloseAction,
+        EditComponent,
     },
 
     data() {
@@ -91,10 +93,6 @@ export default {
     computed: {
         activeItems() {
             return this.items.filter((item) => item.active === 1)
-        },
-
-        isAllowEdit() {
-            return false;
         },
     },
 
@@ -117,9 +115,10 @@ export default {
 
         edit(id, name, description, active) {
             this.editItemId = id
-            this.categoryName = name
-            this.categoryDescription = description
-            this.active = active
+            let edit = this.$refs[`${id}`][0]
+            edit.categoryName = name
+            edit.categoryDescription = description
+            edit.active = active
         },
 
         update(id) {
@@ -171,10 +170,6 @@ export default {
 
         isEdit(id) {
             return this.editItemId === id
-        },
-
-        closeForm() {
-            this.editItemId = null
         },
 
         tableLog() {
