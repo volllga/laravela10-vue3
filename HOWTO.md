@@ -89,4 +89,7 @@ and add the following code to app.blade.php  as follow:
 13. npm install
 14. php artisan ui vue --auth
 15. php artisan migrate
-16. npm run dev
+16. npm run dev 
+17. npm install vue-router
+19. npm run dev
+20. php artisan serve
