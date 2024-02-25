@@ -12,7 +12,7 @@ const routes = [
         path: '/first', component: FirstComponent
     },
     {
-        path: '/categories', component: Categories
+        path: '/categories', component: () => import('./components/Category/Index.vue')
     },
 ]
 
