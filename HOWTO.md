@@ -93,3 +93,10 @@ and add the following code to app.blade.php  as follow:
 17. npm install vue-router
 19. npm run dev
 20. php artisan serve
+
+DB
+21. create file database/database.sqlite
+22. Add database Data Source from path
+23. Add driver SQLite
+24. Test connection
+21. php artisan db:seed --class=CategoriesTableSeeder
