@@ -12,7 +12,12 @@ const routes = [
         path: '/first', component: FirstComponent
     },
     {
-        path: '/categories', component: () => import('./components/Category/Index.vue')
+        path: '/categories', component: () => import('./components/Category/Index.vue'),
+        name: 'category.index'
+    },
+    {
+        path: '/categories/create', component: () => import('./components/Category/Create.vue'),
+        name: 'category.create'
     },
 ]
 

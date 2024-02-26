@@ -2,7 +2,7 @@
 
     <tr :class="this.$parent.isEdit(item.id) ? '' : 'd-none'">
         <th scope="row">{{ item.id }}</th>
-        <td><input type="text" v-model="categoryName" class="form-control"></td>
+        <td><input type="text" v-model="categoryName" class="form-control mw-100"></td>
         <td><input type="text" v-model="categoryDescription" class="form-control"
                    :disabled="!this.$parent.$parent.isAllowEditDescription">
         </td>

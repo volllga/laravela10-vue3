@@ -9,11 +9,10 @@
                     <router-link to="/first" class="breadcrumb">First</router-link>
                 </li>
                 <li class="breadcrumb-item">
-                    <router-link to="/categories" class="breadcrumb">Categories</router-link>
+                    <router-link :to="{ name: 'category.index' }" class="breadcrumb">Categories</router-link>
                 </li>
             </ol>
         </nav>
-        <hr>
         <router-view></router-view>
     </div>
 </template>
