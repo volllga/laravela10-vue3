@@ -15,8 +15,8 @@
             </thead>
             <tbody v-if="items && items.length">
             <template v-for="item in activeItems" :key="item.id">
-                <ShowComponent :item="item" ></ShowComponent>
-                <EditComponent :item="item" :ref="`${item.id}`"></EditComponent>
+                <Show :item="item" ></Show>
+                <Edit :item="item" :ref="`${item.id}`"></Edit>
             </template>
             </tbody>
         </table>
@@ -33,21 +33,21 @@
 
 <script>
 import axios from 'axios';
-import CreateComponent from "@/components/CreateComponent.vue";
+import Create from "@/components/Category/Create.vue";
 import EditAction from "@/components/actions/EditAction.vue";
 import DeleteAction from "@/components/actions/DeleteAction.vue";
-import EditComponent from "@/components/EditComponent.vue";
-import ShowComponent from "@/components/ShowComponent.vue";
+import Edit from "@/components/Category/Edit.vue";
+import Show from "@/components/Category/Show.vue";
 
 export default {
     name: 'Categories',
 
     components: {
-        CreateComponent,
+        Create,
         EditAction,
         DeleteAction,
-        EditComponent,
-        ShowComponent
+        Edit,
+        Show
     },
 
     data() {

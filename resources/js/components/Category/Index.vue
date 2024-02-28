@@ -11,7 +11,13 @@ import Categories from "@/components/Category/Categories.vue";
 import Create from "@/components/Category/Create.vue";
 export default {
     name: "Index",
-    components: {Create, Categories}
+    components: {Create, Categories},
+
+    data() {
+        return {
+            isAllowEditDescription: false,
+        }
+    }
 }
 </script>
 

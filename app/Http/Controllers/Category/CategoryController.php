@@ -21,21 +21,20 @@ class CategoryController extends Controller
 //
     public function store(CategoryRequest $request)
     {
-        // Validation has passed, create the category
         try {
             dump($request->validated());
             $category = Category::create($request->validated());
             return $category;
         } catch (\Exception $e) {
-            // Handle any exception that might occur during category creation
             return response()->json(['error' => 'Failed to create category'], 500);
         }
     }
 //
-//    public function show(Category $category)
-//    {
-//        return view('categories.show', compact('category'));
-//    }
+    public function show($category)
+    {
+
+        return Category::findOrFail($category);
+    }
 //
 //    public function edit(Category $category)
 //    {

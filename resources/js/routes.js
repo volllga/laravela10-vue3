@@ -1,5 +1,4 @@
 import FirstComponent from "./components/FirstComponent.vue";
-import Categories from "./components/Categories.vue";
 import Home from "./components/Home.vue";
 
 
@@ -18,6 +17,14 @@ const routes = [
     {
         path: '/categories/create', component: () => import('./components/Category/Create.vue'),
         name: 'category.create'
+    },
+    {
+        path: '/categories/:id/edit', component: () => import('./components/Category/Edit1.vue'),
+        name: 'category.edit'
+    },
+    {
+        path: '/categories/show', component: () => import('./components/Category/Show1.vue'),
+        name: 'category.show'
     },
 ]
 
