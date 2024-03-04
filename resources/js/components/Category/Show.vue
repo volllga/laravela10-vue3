@@ -1,7 +1,7 @@
 <template>
 
     <tr :class="this.$parent.isEdit(item.id) ? 'd-none' : ''">
-        <th scope="row">{{ item.id }}</th>
+        <th scope="row"><router-link :to="{ name: 'category.edit', params:{id: item.id}}">{{ item.id }}</router-link></th>
         <td>{{ item.category_name }}</td>
         <td>{{ item.category_description }}</td>
         <td>{{ item.active }}</td>
@@ -27,6 +27,7 @@
 import axios from 'axios';
 import EditAction from "@/components/actions/EditAction.vue";
 import DeleteAction from "@/components/actions/DeleteAction.vue";
+import router from "../../router.js";
 
 
 export default {

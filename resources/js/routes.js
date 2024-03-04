@@ -19,11 +19,11 @@ const routes = [
         name: 'category.create'
     },
     {
-        path: '/categories/:id/edit', component: () => import('./components/Category/Edit1.vue'),
+        path: '/categories/:id/edit', component: () => import('./components/Category/CategoryEdit.vue'),
         name: 'category.edit'
     },
     {
-        path: '/categories/show', component: () => import('./components/Category/Show1.vue'),
+        path: '/categories/:id', component: () => import('./components/Category/CategoryShow.vue'),
         name: 'category.show'
     },
 ]

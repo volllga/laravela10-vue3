@@ -1,6 +1,7 @@
 <template>
     <div class="container">
-        <h2>Edit Category 1</h2>
+        <router-link :to="{ name: 'category.show', params:{id: this.$route.params.id}}">Back to Show</router-link>
+        <h2>Edit Category</h2>
         <div class="w-50">
             <div class="mb-3">
                 <label for="categoryName" class="form-label">Category Name</label>
@@ -29,7 +30,7 @@ import router from "../../router.js";
 
 
 export default {
-    name: "Edit1",
+    name: "CategoryEdit",
 
     data() {
         return {
@@ -60,7 +61,7 @@ export default {
                 active: this.active,
             })
                 .then(res => {
-                    router.push({name: 'category.show'})
+                    router.push({name: 'category.show', params: {id: this.$route.params.id}})
                     alert("Category updated successfully!")
                 })
         }
