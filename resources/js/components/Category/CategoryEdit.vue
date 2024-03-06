@@ -8,7 +8,7 @@
                 <input type="text" v-model="categoryName" class="form-control" id="categoryName" placeholder="Category Name">
             </div>
             <div class="mb-3">
-                <label for="Category Description" class="form-label">Category Description</label>
+                <label for="categoryDescription" class="form-label">Category Description</label>
                 <input type="text" v-model="categoryDescription" class="form-control" id="categoryDescription" placeholder="Category Description"
                        :disabled="!this.$parent.$parent.isAllowEditDescription">
             </div>
@@ -25,9 +25,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-import router from "../../router.js";
-
 
 export default {
     name: "CategoryEdit",
@@ -45,26 +42,28 @@ export default {
     },
 
     methods: {
+
         getItem() {
-            axios.get('/api/categories/' + this.$route.params.id)
+            axios.get(`/api/categories/${this.$route.params.id}`)
                 .then(res => {
                     // console.log(this.$route)
-                    this.categoryName = res.data.category_name;
-                    this.categoryDescription = res.data.category_description;
-                    this.active = res.data.active;
+                    this.categoryName = res.data.data.category_name;
+                    this.categoryDescription = res.data.data.category_description;
+                    this.active = res.data.data.active;
                 })
         },
+
         update() {
-            axios.patch('/api/categories/' + this.$route.params.id, {
+            axios.patch(`/api/categories/${this.$route.params.id}`, {
                 category_name: this.categoryName,
                 category_description: this.categoryDescription,
                 active: this.active,
             })
                 .then(res => {
-                    router.push({name: 'category.show', params: {id: this.$route.params.id}})
+                    this.$router.push({name: 'category.show', params: {id: this.$route.params.id}})
                     alert("Category updated successfully!")
                 })
-        }
+        },
     }
 }
 </script>

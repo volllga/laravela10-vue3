@@ -41,7 +41,12 @@
                             <label class="form-check-label" for="active">Active</label>
                         </div>
 
-                        <button @click.prevent="store" type="submit" class="btn btn-primary">Submit</button>
+                        <button
+                            :disabled="!isDisabled"
+                            @click.prevent="store"
+                            type="submit"
+                            class="btn btn-primary"
+                        >Submit</button>
                     </div>
                 </div>
             </div>
@@ -68,12 +73,15 @@ export default {
     },
 
     computed: {
-
+        isDisabled()
+        {
+            return this.categoryName.trim()
+        }
     },
 
     methods: {
         store() {
-            axios.post("api/categories", {
+            axios.post(`api/categories`, {
                 category_name: this.categoryName,
                 category_description: this.categoryDescription,
                 active: this.active,

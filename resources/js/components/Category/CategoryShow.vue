@@ -6,6 +6,7 @@
             <div>Category Description: {{ category.category_description }}</div>
             <div>Active: {{ category.active }}</div>
             <div>Created at: {{ category.created_at }}</div>
+            <div>Updated at: {{ category.updated_at }}</div>
             <router-link :to="{ name: 'category.edit', params:{id: category.id}}">Edit</router-link>
         </div>
         <div v-else>
@@ -17,8 +18,6 @@
 
 
 <script>
-import { onMounted } from 'vue';
-import axios from "axios";
 
 export default {
     name: "CategoryShow",
@@ -38,9 +37,10 @@ export default {
 
     methods: {
         getItem() {
-            axios.get('/api/categories/' + this.$route.params.id)
+            axios.get(`/api/categories/${this.$route.params.id}`)
                 .then(res => {
-                    this.category = res.data;
+                    console.log(res.data);
+                    this.category = res.data.data;
                 })
                 .catch(error => {
                     console.error('Error fetching category:', error);

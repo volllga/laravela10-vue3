@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Category;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\CategoryRequest;
+use App\Http\Resources\Category\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,9 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return Category::all();
+        $categories = Category::all();
+
+        return CategoryResource::collection($categories);
     }
 
 //    public function create()
@@ -22,18 +25,18 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         try {
-            dump($request->validated());
+//            dump($request->validated());
             $category = Category::create($request->validated());
-            return $category;
+            return new CategoryResource($category);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to create category'], 500);
         }
     }
 //
-    public function show($category)
+    public function show(Category $category)
     {
 
-        return Category::findOrFail($category);
+        return new CategoryResource($category);
     }
 //
 //    public function edit(Category $category)

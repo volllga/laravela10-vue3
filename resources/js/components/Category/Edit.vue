@@ -2,11 +2,11 @@
 
     <tr :class="this.$parent.isEdit(item.id) ? '' : 'd-none'">
         <th scope="row">{{ item.id }}</th>
-        <td><input type="text" v-model="categoryName" class="form-control mw-100"></td>
+        <td><input type="text" v-model="categoryName" class="form-control mw-100" name="categoryName"></td>
         <td><input type="text" v-model="categoryDescription" class="form-control"
-                   :disabled="!this.$parent.$parent.isAllowEditDescription">
+                   :disabled="!this.$parent.$parent.isAllowEditDescription" name="categoryDescription">
         </td>
-        <td><input type="checkbox" v-model="active" class="form-check-input" :checked="active">&nbsp Active</td>
+        <td><input type="checkbox" v-model="active" class="form-check-input" :checked="active" name="active">&nbsp Active</td>
         <td></td>
         <td></td>
         <td>

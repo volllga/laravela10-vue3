@@ -73,8 +73,8 @@ export default {
     methods: {
         getItems() {
             axios.get('api/categories')
-                .then((response) => {
-                    this.items = response.data
+                .then((resp) => {
+                    this.items = resp.data.data
                     //console.log(this.items)
                 })
                 .catch((error) => {
