@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import router from "../router.js";
+import router from "../router/router.js";
 
 export default {
     name: "Home",
