@@ -1,17 +1,12 @@
-import FirstComponent from "./components/FirstComponent.vue";
-import Home from "./components/Home.vue";
-
-
-
 const routes = [
     {
-        path: '/home', component: Home
+        path: '/home', component: () => import('./components/Home.vue'),
     },
     {
-        path: '/first', component: FirstComponent
+        path: '/first', component: () => import('./components/FirstComponent.vue'),
     },
     {
-        path: '/categories', component: () => import('./components/Category/Index.vue'),
+        path: '/categories', component: () => import('./components/Category/CategoryIndex.vue'),
         name: 'category.index'
     },
     {

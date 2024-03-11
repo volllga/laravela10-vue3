@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        Index
+        Category Index
     </div>
     <create></create>
     <categories ref="categories"></categories>
@@ -10,7 +10,7 @@
 import Categories from "@/components/Category/Categories.vue";
 import Create from "@/components/Category/Create.vue";
 export default {
-    name: "Index",
+    name: "Category Index",
     components: {Create, Categories},
 
     data() {
