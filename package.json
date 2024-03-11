@@ -10,7 +10,11 @@
         "@vitejs/plugin-vue": "^4.5.0",
         "axios": "^1.6.4",
         "bootstrap": "^5.2.3",
+        "eslint": "^8.57.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-vue": "^9.22.0",
         "laravel-vite-plugin": "^1.0.0",
+        "prettier": "^3.2.5",
         "sass": "^1.56.1",
         "vite": "^5.0.0",
         "vue": "^3.2.37"
@@ -19,6 +23,7 @@
         "@vitejs/plugin-vue": "^4.6.2",
         "vue": "^3.4.15",
         "vue-loader": "^17.4.2",
-        "vue-router": "^4.3.0"
+        "vue-router": "^4.3.0",
+        "vuex": "^4.0.2"
     }
 }
