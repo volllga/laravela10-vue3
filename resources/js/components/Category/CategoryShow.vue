@@ -11,7 +11,6 @@
         </div>
         <div v-else>
             <p>Loading...</p>
-            <!-- Add additional handling for when category is not available -->
         </div>
     </div>
 </template>
@@ -25,29 +24,16 @@ export default {
         title: 'Category Show'
     }),
 
-    data() {
-        return {
-            category: null
-        }
-    },
-
     mounted() {
-        this.getItem()
+        this.$store.dispatch('getItem', this.$route.params.id)
     },
 
-    methods: {
-        getItem() {
-            axios.get(`/api/categories/${this.$route.params.id}`)
-                .then(res => {
-                    console.log(res.data);
-                    this.category = res.data.data;
-                })
-                .catch(error => {
-                    console.error('Error fetching category:', error);
-                    // Handle the error, show a message, or redirect the user.
-                });
-        },
-    }
+    computed: {
+       category() {
+            return this.$store.getters.category
+       },
+    },
+
 }
 </script>
 
