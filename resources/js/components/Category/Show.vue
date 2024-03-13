@@ -13,7 +13,7 @@
                 <EditAction/>
             </a>
             <span v-if="true">&nbsp;</span>
-            <a href="#" class="btn btn-outline-danger btn-sm" @click.prevent="destroy(item.id)">
+            <a href="#" class="btn btn-outline-danger btn-sm" @click.prevent="$store.dispatch('destroy', item.id)">
                 <DeleteAction/>
             </a>
         </td>
@@ -24,7 +24,6 @@
 
 
 <script>
-import axios from 'axios';
 import EditAction from "@/components/actions/EditAction.vue";
 import DeleteAction from "@/components/actions/DeleteAction.vue";
 
@@ -69,29 +68,6 @@ export default {
                 console.error(`Child component with id ${id} not found.`);
             }
         },
-
-
-        destroy(id) {
-            this.$parent.editItemId = null
-            axios.delete(`api/categories/${id}`, {})
-                .then((response) => {
-                    this.$parent.getItems()
-                    alert("Category deleted successfully!")
-
-                })
-                .catch((error) => {
-                    console.error(error);
-
-                    if (error.response && error.response.status === 422) {
-
-                        const validationErrors = error.response.data.errors
-                        console.error(validationErrors)
-                    } else {
-                        alert("Failed to delete category. Please try again.")
-                    }
-                });
-        },
-
     },
 }
 </script>

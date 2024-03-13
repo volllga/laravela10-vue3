@@ -4,7 +4,7 @@
         <th scope="row">{{ item.id }}</th>
         <td><input type="text" v-model="categoryName" class="form-control mw-100" name="categoryName"></td>
         <td><input type="text" v-model="categoryDescription" class="form-control"
-                   :disabled="!this.$parent.$parent.isAllowEditDescription" name="categoryDescription">
+                   :disabled="!isAllowEditDescription" name="categoryDescription">
         </td>
         <td><input type="checkbox" v-model="active" class="form-check-input" :checked="active" name="active">&nbsp Active</td>
         <td></td>
@@ -38,15 +38,19 @@ export default {
     data() {
         return {
             // editItemId: null,
+
             categoryName: '',
             categoryDescription: '',
             active: true,
         };
     },
 
+    mounted() {},
 
-    mounted() {
-
+    computed: {
+        isAllowEditDescription() {
+            return this.$store.getters.description
+        }
     },
 
     methods: {
@@ -58,8 +62,8 @@ export default {
                 category_description: this.categoryDescription,
                 active: this.active,
             })
-                .then((response) => {
-                    this.$parent.getItems()
+                .then(() => {
+                    this.$store.dispatch('getItems')
                     alert("Category updated successfully!")
 
                 })

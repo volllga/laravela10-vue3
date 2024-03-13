@@ -25,7 +25,7 @@
                                 v-model="categoryDescription"
                                 id="category_description"
                                 placeholder="Category Description"
-                                :disabled="!this.$parent.isAllowEditDescription"
+                                :disabled="!isAllowEditDescription"
                             />
                         </div>
 
@@ -76,6 +76,10 @@ export default {
         isDisabled()
         {
             return this.categoryName.trim()
+        },
+
+        isAllowEditDescription() {
+            return this.$store.getters.description
         }
     },
 
@@ -86,11 +90,11 @@ export default {
                 category_description: this.categoryDescription,
                 active: this.active,
             })
-                .then((response) => {
+                .then(() => {
                     this.categoryName = ''
                     this.categoryDescription = ''
                     this.active = true
-                    this.$parent.$refs.categories.getItems()
+                    this.$store.dispatch('getItems')
 
                 })
                 .catch((error) => {

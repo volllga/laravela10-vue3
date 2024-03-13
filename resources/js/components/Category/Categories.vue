@@ -32,7 +32,6 @@
 
 
 <script>
-import axios from 'axios';
 import Create from "@/components/Category/Create.vue";
 import EditAction from "@/components/actions/EditAction.vue";
 import DeleteAction from "@/components/actions/DeleteAction.vue";
@@ -52,11 +51,7 @@ export default {
 
     data() {
         return {
-            items: [],
             editItemId: null,
-            categoryName: '',
-            categoryDescription: '',
-            active: true,
         };
     },
 
@@ -64,24 +59,17 @@ export default {
         activeItems() {
             return this.items.filter((item) => item.active === 1)
         },
+
+        items() {
+            return this.$store.getters.categories
+        },
     },
 
     mounted() {
-        this.getItems()
+        this.$store.dispatch('getItems')
     },
 
     methods: {
-        getItems() {
-            axios.get('api/categories')
-                .then((resp) => {
-                    this.items = resp.data.data
-                    //console.log(this.items)
-                })
-                .catch((error) => {
-                    console.error('Error fetching items:', error)
-                });
-        },
-
         isEdit(id) {
             return this.editItemId === id
         },
