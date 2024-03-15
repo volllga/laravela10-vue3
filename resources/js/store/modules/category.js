@@ -4,7 +4,7 @@ export default {
     state: () => ({
         category: null,
         categories: null,
-        description: true,
+        description: false,
     }),
 
     getters: {

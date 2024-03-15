@@ -14,11 +14,6 @@ export default {
     name: "Category Index",
     components: {Create, Categories},
 
-    data() {
-        return {
-            isAllowEditDescription: false,
-        }
-    }
 }
 </script>
 

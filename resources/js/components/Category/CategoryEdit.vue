@@ -10,7 +10,7 @@
             <div class="mb-3">
                 <label for="categoryDescription" class="form-label">Category Description</label>
                 <input type="text" v-model="categoryDescription" class="form-control" id="categoryDescription" placeholder="Category Description"
-                       :disabled="!this.$parent.$parent.isAllowEditDescription">
+                       :disabled="!isAllowEditDescription">
             </div>
             <div class="form-check">
                 <input class="form-check-input" v-model="active" type="checkbox" value="" id="active" :checked="active">
@@ -41,6 +41,17 @@ export default {
         this.getItem();
     },
 
+    computed: {
+        isDisabled()
+        {
+            return this.categoryName.trim()
+        },
+
+        isAllowEditDescription() {
+            return this.$store.getters.description
+        }
+    },
+
     methods: {
 
         getItem() {
@@ -59,7 +70,7 @@ export default {
                 category_description: this.categoryDescription,
                 active: this.active,
             })
-                .then(res => {
+                .then(() => {
                     this.$router.push({name: 'category.show', params: {id: this.$route.params.id}})
                     alert("Category updated successfully!")
                 })
