@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import router from "../../router/router.js";
+
 export default {
     name: "CategoryEdit",
     data() {
@@ -49,6 +51,7 @@ export default {
             if (!this.category) return; // Handle edge case where category is not loaded
             const { id, category_name, category_description, active } = this.category;
             this.$store.dispatch('update', { id, category_name, category_description, active });
+            router.push({name: 'category.show', params: {id: this.category.id}});
         }
     }
 };

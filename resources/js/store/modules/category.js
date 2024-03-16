@@ -1,5 +1,4 @@
 import axios from "axios";
-import router from "../../router/router.js";
 
 export default {
     state: () => ({
@@ -69,7 +68,6 @@ export default {
                     category_description: data.category_description,
                     active: data.active,
                 });
-                router.push({name: 'category.show', params: {id: data.id}});
                 alert("Category updated successfully!");
             } catch (error) {
                 handleRequestError(error, 'Failed to update category. Please try again.');

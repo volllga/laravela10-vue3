@@ -21,7 +21,6 @@
 
 
 <script>
-import axios from 'axios';
 import CloseAction from "../actions/CloseAction.vue";
 
 export default {
@@ -37,15 +36,11 @@ export default {
 
     data() {
         return {
-            // editItemId: null,
-
             categoryName: '',
             categoryDescription: '',
             active: true,
         };
     },
-
-    mounted() {},
 
     computed: {
         isAllowEditDescription() {
@@ -54,30 +49,10 @@ export default {
     },
 
     methods: {
-
         update(id) {
+            this.$store.dispatch('update', { id: id, category_name: this.categoryName, category_description: this.categoryDescription, active: this.active,})
             this.$parent.editItemId = null
-            axios.patch(`api/categories/${id}`, {
-                category_name: this.categoryName,
-                category_description: this.categoryDescription,
-                active: this.active,
-            })
-                .then(() => {
-                    this.$store.dispatch('getItems')
-                    alert("Category updated successfully!")
-
-                })
-                .catch((error) => {
-                    console.error(error);
-
-                    if (error.response && error.response.status === 422) {
-
-                        const validationErrors = error.response.data.errors
-                        console.error(validationErrors)
-                    } else {
-                        alert("Failed to update category. Please try again.")
-                    }
-                });
+            this.$store.dispatch('getItems')
         },
 
         closeForm() {
