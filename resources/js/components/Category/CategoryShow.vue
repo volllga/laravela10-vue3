@@ -25,7 +25,7 @@ export default {
     }),
 
     mounted() {
-        this.$store.dispatch('getItem', this.$route.params.id)
+        this.$store.dispatch('getCategory', this.$route.params.id)
     },
 
     computed: {

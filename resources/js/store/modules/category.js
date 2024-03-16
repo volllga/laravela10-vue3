@@ -39,7 +39,7 @@ export default {
                 });
         },
 
-        getItem({ commit }, id) {
+        getCategory({ commit }, id) {
             axios.get(`/api/categories/${id}`)
                 .then(resp => {
                     commit('setCategory', resp.data.data)

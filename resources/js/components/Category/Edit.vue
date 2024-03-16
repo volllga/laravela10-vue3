@@ -6,7 +6,7 @@
         <td><input type="text" v-model="categoryDescription" class="form-control"
                    :disabled="!isAllowEditDescription" name="categoryDescription">
         </td>
-        <td><input type="checkbox" v-model="active" class="form-check-input" :checked="active" name="active">&nbsp Active</td>
+        <td><input type="checkbox" v-model="active" class="form-check-input" name="active">&nbsp Active</td>
         <td></td>
         <td></td>
         <td>

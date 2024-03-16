@@ -57,7 +57,8 @@ export default {
 
     computed: {
         activeItems() {
-            return this.items.filter((item) => item.active === 1)
+            return this.items
+                // .filter((item) => item.active === true)
         },
 
         items() {

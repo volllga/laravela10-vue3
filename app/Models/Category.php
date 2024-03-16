@@ -30,6 +30,7 @@ class Category extends Model
     }
 
     protected $casts = [
+        'active' => 'boolean',
         'created_at' => 'date:Y-m-d',
         'updated_at' => 'date:Y-m-d',
         'deleted_at' => 'date:Y-m-d',

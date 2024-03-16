@@ -2,18 +2,18 @@
     <div class="container">
         <router-link :to="{ name: 'category.show', params:{id: this.$route.params.id}}">Back to Show</router-link>
         <h2>Edit Category</h2>
-        <div class="w-50">
+        <div class="w-50" v-if="category">
             <div class="mb-3">
                 <label for="categoryName" class="form-label">Category Name</label>
-                <input type="text" v-model="categoryName" class="form-control" id="categoryName" placeholder="Category Name">
+                <input type="text" v-model="category.category_name" class="form-control" id="categoryName" placeholder="Category Name">
             </div>
             <div class="mb-3">
                 <label for="categoryDescription" class="form-label">Category Description</label>
-                <input type="text" v-model="categoryDescription" class="form-control" id="categoryDescription" placeholder="Category Description"
+                <input type="text" v-model="category.category_description" class="form-control" id="categoryDescription" placeholder="Category Description"
                        :disabled="!isAllowEditDescription">
             </div>
             <div class="form-check">
-                <input class="form-check-input" v-model="active" type="checkbox" value="" id="active" :checked="active">
+                <input class="form-check-input" v-model="category.active" type="checkbox" id="active">
                 <label class="form-check-label" for="active">
                     Active
                 </label>
@@ -29,16 +29,8 @@
 export default {
     name: "CategoryEdit",
 
-    data() {
-        return {
-            categoryName: '',
-            categoryDescription: '',
-            active: true,
-        };
-    },
-
     mounted() {
-        this.getItem();
+        this.$store.dispatch('getCategory', this.$route.params.id)
     },
 
     computed: {
@@ -49,20 +41,14 @@ export default {
 
         isAllowEditDescription() {
             return this.$store.getters.description
-        }
+        },
+
+        category() {
+            return this.$store.getters.category
+        },
     },
 
     methods: {
-
-        getItem() {
-            axios.get(`/api/categories/${this.$route.params.id}`)
-                .then(res => {
-                    // console.log(this.$route)
-                    this.categoryName = res.data.data.category_name;
-                    this.categoryDescription = res.data.data.category_description;
-                    this.active = res.data.data.active;
-                })
-        },
 
         update() {
             axios.patch(`/api/categories/${this.$route.params.id}`, {
