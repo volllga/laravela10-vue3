@@ -23,7 +23,7 @@
 
 <script>
 import router from "../../router/router.js";
-
+import {mapGetters} from 'vuex';
 export default {
     name: "CategoryEdit",
     data() {
@@ -36,15 +36,13 @@ export default {
         this.$store.dispatch('getCategory', this.categoryId);
     },
     computed: {
+        ...mapGetters({
+            isAllowEditDescription: "description",
+            category: "category"
+        }),
         isDisabled() {
             return !this.category || !this.category.category_name.trim();
         },
-        isAllowEditDescription() {
-            return this.$store.getters.description;
-        },
-        category() {
-            return this.$store.getters.category;
-        }
     },
     methods: {
         updateCategory() {
