@@ -1,4 +1,5 @@
 import axios from "axios";
+import router from "../../router/router.js";
 
 export default {
     state: () => ({
@@ -47,6 +48,18 @@ export default {
                 .catch(error => {
                     commit('setCategory', null)
                     console.error('Error fetching category:', error)
+                })
+        },
+
+        update({}, data) {
+            axios.patch(`/api/categories/${data.id}`, {
+                category_name: data.category_name,
+                category_description: data.category_description,
+                active: data.active,
+            })
+                .then(() => {
+                    router.push({name: 'category.show', params: {id: data.id}})
+                    alert("Category updated successfully!")
                 })
         },
 

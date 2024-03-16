@@ -20,7 +20,12 @@
             </div>
         </div>
         <br>
-        <button type="button" @click.prevent="update()" class="btn btn-primary">Submit</button>
+        <button type="button" @click.prevent="$store.dispatch('update', {
+                id: category.id,
+                category_name: category.category_name,
+                category_description: category.category_description,
+                active: category.active,
+            })" class="btn btn-primary">Submit</button>
     </div>
 </template>
 
@@ -36,7 +41,7 @@ export default {
     computed: {
         isDisabled()
         {
-            return this.categoryName.trim()
+            return this.category.category_name.trim()
         },
 
         isAllowEditDescription() {
@@ -47,21 +52,6 @@ export default {
             return this.$store.getters.category
         },
     },
-
-    methods: {
-
-        update() {
-            axios.patch(`/api/categories/${this.$route.params.id}`, {
-                category_name: this.categoryName,
-                category_description: this.categoryDescription,
-                active: this.active,
-            })
-                .then(() => {
-                    this.$router.push({name: 'category.show', params: {id: this.$route.params.id}})
-                    alert("Category updated successfully!")
-                })
-        },
-    }
 }
 </script>
 
