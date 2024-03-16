@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <router-link :to="{ name: 'category.show', params:{id: this.$route.params.id}}">Back to Show</router-link>
+        <router-link :to="{ name: 'category.show', params: { id: categoryId }}">Back to Show</router-link>
         <h2>Edit Category</h2>
         <div class="w-50" v-if="category">
             <div class="mb-3">
@@ -9,50 +9,49 @@
             </div>
             <div class="mb-3">
                 <label for="categoryDescription" class="form-label">Category Description</label>
-                <input type="text" v-model="category.category_description" class="form-control" id="categoryDescription" placeholder="Category Description"
-                       :disabled="!isAllowEditDescription">
+                <input type="text" v-model="category.category_description" class="form-control" id="categoryDescription" placeholder="Category Description" :disabled="!isAllowEditDescription">
             </div>
             <div class="form-check">
                 <input class="form-check-input" v-model="category.active" type="checkbox" id="active">
-                <label class="form-check-label" for="active">
-                    Active
-                </label>
+                <label class="form-check-label" for="active">Active</label>
             </div>
         </div>
         <br>
-        <button type="button" @click.prevent="$store.dispatch('update', {
-                id: category.id,
-                category_name: category.category_name,
-                category_description: category.category_description,
-                active: category.active,
-            })" class="btn btn-primary">Submit</button>
+        <button type="button" @click.prevent="updateCategory" class="btn btn-primary" :disabled="isDisabled">Submit</button>
     </div>
 </template>
 
 <script>
-
 export default {
     name: "CategoryEdit",
-
+    data() {
+        return {
+            categoryId: null
+        };
+    },
     mounted() {
-        this.$store.dispatch('getCategory', this.$route.params.id)
+        this.categoryId = this.$route.params.id;
+        this.$store.dispatch('getCategory', this.categoryId);
     },
-
     computed: {
-        isDisabled()
-        {
-            return this.category.category_name.trim()
+        isDisabled() {
+            return !this.category || !this.category.category_name.trim();
         },
-
         isAllowEditDescription() {
-            return this.$store.getters.description
+            return this.$store.getters.description;
         },
-
         category() {
-            return this.$store.getters.category
-        },
+            return this.$store.getters.category;
+        }
     },
-}
+    methods: {
+        updateCategory() {
+            if (!this.category) return; // Handle edge case where category is not loaded
+            const { id, category_name, category_description, active } = this.category;
+            this.$store.dispatch('update', { id, category_name, category_description, active });
+        }
+    }
+};
 </script>
 
 <style scoped>
