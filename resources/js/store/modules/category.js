@@ -5,7 +5,7 @@ export default {
     state: () => ({
         category: null,
         categories: null,
-        description: false,
+        description: true,
     }),
 
     getters: {
@@ -48,6 +48,27 @@ export default {
                 .catch(error => {
                     commit('setCategory', null)
                     console.error('Error fetching category:', error)
+                })
+        },
+
+        store({ dispatch }, data) {
+            axios.post(`api/categories`, {
+                category_name: data.category_name,
+                category_description: data.category_description,
+                active: data.active,
+            })
+                .then(() => {
+                    dispatch('getItems')
+
+                })
+                .catch((e) => {
+                    console.error(e);
+
+                    if (e.response && e.response.status === 422) {
+                        this.validationErrors = e.response.data.errors;
+                    } else {
+                        alert("Failed to create category. Please try again.")
+                    }
                 })
         },
 

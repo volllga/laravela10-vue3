@@ -37,13 +37,12 @@
                                 id="active"
                                 checked
                             />
-
                             <label class="form-check-label" for="active">Active</label>
                         </div>
 
                         <button
                             :disabled="!isDisabled"
-                            @click.prevent="store"
+                            @click.prevent="handleSubmit"
                             type="submit"
                             class="btn btn-primary"
                         >Submit</button>
@@ -56,13 +55,9 @@
 
 <script>
 
-import axios from 'axios'
 
 export default {
     name: "Create",
-
-
-
     data() {
         return {
             validationErrors: null,
@@ -71,44 +66,36 @@ export default {
             active: true,
         }
     },
-
     computed: {
-        isDisabled()
-        {
-            return this.categoryName.trim()
+        isDisabled() {
+            return this.categoryName.trim();
         },
-
         isAllowEditDescription() {
-            return this.$store.getters.description
+            return this.$store.getters.description;
         }
     },
-
     methods: {
-        store() {
-            axios.post(`api/categories`, {
+        handleSubmit() {
+            this.$store.dispatch('store', {
                 category_name: this.categoryName,
                 category_description: this.categoryDescription,
-                active: this.active,
-            })
-                .then(() => {
-                    this.categoryName = ''
-                    this.categoryDescription = ''
-                    this.active = true
-                    this.$store.dispatch('getItems')
+                active: this.active
+            }).then(() => {
+                alert(`Category ${this.categoryName} created successfully.`)
+                this.categoryName = '';
+                this.categoryDescription = '';
+                this.active = true;
 
-                })
-                .catch((error) => {
-                    console.error(error);
-
-                    if (error.response && error.response.status === 422) {
-                        this.validationErrors = error.response.data.errors;
-                    } else {
-                        alert("Failed to create category. Please try again.")
-                    }
-                })
-        },
-
-    },
+            }).catch(error => {
+                console.error(error);
+                if (error.response && error.response.status === 422) {
+                    this.validationErrors = error.response.data.errors;
+                } else {
+                    alert("Failed to create category. Please try again.")
+                }
+            });
+        }
+    }
 }
 </script>
 
