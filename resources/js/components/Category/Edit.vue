@@ -10,8 +10,8 @@
         <td></td>
         <td></td>
         <td>
-            <a href="#" class="btn btn-success btn-sm" @click.prevent="update(item.id)">Save</a>&nbsp
-            <a href="#" class="btn btn-secondary btn-sm" @click.prevent="closeForm()">
+            <a class="btn btn-success btn-sm" @click.prevent="update(item.id)">Save</a>&nbsp
+            <a class="btn btn-secondary btn-sm" @click.prevent="closeForm()">
                 <CloseAction/>
             </a>
         </td>
@@ -30,9 +30,12 @@ export default {
         CloseAction,
     },
 
-    props: [
-        'item'
-    ],
+    props: {
+        item: {
+            type: Object,
+            required: true
+        }
+    },
 
     data() {
         return {
@@ -49,15 +52,22 @@ export default {
     },
 
     methods: {
-        update(id) {
-            this.$store.dispatch('update', { id: id, category_name: this.categoryName, category_description: this.categoryDescription, active: this.active,})
-            this.$parent.editItemId = null
-            this.$store.dispatch('getItems')
+        update() {
+            const updatedItem = {
+                id: this.item.id,
+                category_name: this.categoryName,
+                category_description: this.categoryDescription,
+                active: this.active
+            };
+
+            this.$store.dispatch('update', updatedItem);
+            this.closeForm();
+            this.$store.dispatch('getItems');
         },
 
         closeForm() {
-            this.$parent.editItemId = null
-        },
+            this.$parent.editItemId = null;
+        }
     },
 }
 </script>
