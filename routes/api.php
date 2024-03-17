@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Category\CategoryController;
+use App\Http\Controllers\Employee\EmployeeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +27,12 @@ Route::group(['namespace' => 'App\Http\Controllers\Category', 'prefix' => 'categ
     Route::post('/', [CategoryController::class, 'store']);
     Route::patch('/{category}', [CategoryController::class, 'update']);
     Route::delete('/{category}', [CategoryController::class, 'destroy']);
+});
+
+Route::group(['namespace' => 'App\Http\Controllers\Employee', 'prefix' => 'employees'], function () {
+    Route::get('/', [EmployeeController::class, 'index']);
+    Route::get('/{employee}', [EmployeeController::class, 'show']);
+    Route::post('/', [EmployeeController::class, 'store']);
+    Route::patch('/{employee}', [EmployeeController::class, 'update']);
+    Route::delete('/{employee}', [EmployeeController::class, 'destroy']);
 });

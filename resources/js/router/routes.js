@@ -21,6 +21,10 @@ const routes = [
         path: '/categories/:id', component: () => import('../components/Category/CategoryShow.vue'),
         name: 'category.show'
     },
+    {
+        path: '/employees', component: () => import('../components/Employee/Employee.vue'),
+        name: 'employee'
+    },
 ]
 
 export default routes
