@@ -78,7 +78,7 @@
 
 
 export default {
-    name: "EmployeeCreate",
+    name: "EmployeeEdit",
     data() {
         return {
             validationErrors: null,
