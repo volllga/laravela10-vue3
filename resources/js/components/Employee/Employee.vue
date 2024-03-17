@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        Category Index
+        Employee
     </div>
     <create></create>
     <categories ref="categories"></categories>
