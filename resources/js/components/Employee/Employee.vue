@@ -10,11 +10,10 @@
 
 <script>
 import Employees from "@/components/Employee/Employees.vue";
-import CreateEmployee from "@/components/Employee/CreateEmployee.vue";
 
 export default {
     name: "Employee",
-    components: {CreateEmployee, Employees},
+    components: { Employees},
     methods: {
         createEmployee() {
             this.$router.push({ name: 'employee.create' });

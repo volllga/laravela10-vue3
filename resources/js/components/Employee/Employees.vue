@@ -16,7 +16,7 @@
             <tbody v-if="items && items.length">
             <tr v-for="item in activeItems" :key="item.id">
                 <td>
-                    <router-link :to="{ name: 'category.show', params:{id: item.id}}">
+                    <router-link :to="{ name: 'employee.show', params:{id: item.id}}">
                         {{ item.id }}
                     </router-link>
                 </td>
@@ -26,7 +26,7 @@
                 <td>{{ item.created_at }}</td>
                 <td>{{ item.updated_at }}</td>
                 <td>
-                    <a href="#" class="btn btn-outline-primary btn-sm" @click.prevent="edit(item)">
+                    <a href="#" class="btn btn-outline-primary btn-sm" @click.prevent="$router.push(`/employees/${item.id}/edit`)">
                         <EditAction/>
                     </a>
                     <span>&nbsp;</span>

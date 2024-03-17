@@ -26,7 +26,6 @@
                                 placeholder="Last Name"
                             />
                         </div>
-
                         <div class="mb-3">
                             <label for="position" class="form-label">Position</label>
                             <input
@@ -38,7 +37,6 @@
 
                             />
                         </div>
-
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input
@@ -81,7 +79,7 @@
 
 
 export default {
-    name: "Create",
+    name: "EmployeeCreate",
     data() {
         return {
             validationErrors: null,

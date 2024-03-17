@@ -16,9 +16,9 @@ class EmployeeController extends Controller
         return EmployeeResource::collection($employees);
     }
 
-    public function show()
+    public function show(Employee $employee)
     {
-
+        return new EmployeeResource($employee);
     }
 
     public function store(EmployeeRequest $request)

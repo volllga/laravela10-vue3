@@ -26,9 +26,18 @@ const routes = [
         name: 'employee'
     },
     {
-        path: '/employees/create', component: () => import('../components/Employee/CreateEmployee.vue'),
+        path: '/employees/create', component: () => import('../components/Employee/EmployeeCreate.vue'),
         name: 'employee.create'
     },
+    {
+        path: '/employees/:id', component: () => import('../components/Employee/EmployeeShow.vue'),
+        name: 'employee.show'
+    },
+    {
+        path: '/employees/:id/edit', component: () => import('../components/Employee/EmployeeEdit.vue'),
+        name: 'employee.edit'
+    },
+
 ]
 
 export default routes
