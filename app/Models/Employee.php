@@ -12,28 +12,7 @@ class Employee extends Model
     use SoftDeletes;
 
     protected $table = 'employees';
-    protected $fillable = [
-        'active',
-        'department_id',
-        'first_name',
-        'last_name',
-        'document',
-        'date_of_birth',
-        'email',
-        'phone',
-        'position',
-        'residency',
-        'postal_code',
-        'address',
-        'city',
-        'region',
-        'country',
-        'salary',
-        'photo',
-        'hire_date',
-        'termination_date',
-        'notes',
-    ];
+    protected $guarded = false;
 
     protected $casts = [
         'active' => 'boolean',
