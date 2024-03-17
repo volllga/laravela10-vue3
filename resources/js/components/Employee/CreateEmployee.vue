@@ -7,34 +7,46 @@
                     <div class="card-body">
 
                         <div class="mb-3">
-                            <label for="category_name" class="form-label">First Name *</label>
+                            <label for="first_name" class="form-label">First Name *</label>
                             <input
                                 type="text"
                                 class="form-control"
                                 v-model="first_name"
-                                id="category_name"
+                                id="first_name"
                                 placeholder="First Name"
                             />
                         </div>
                         <div class="mb-3">
-                            <label for="category_name" class="form-label">Last Name *</label>
+                            <label for="last_name" class="form-label">Last Name *</label>
                             <input
                                 type="text"
                                 class="form-control"
                                 v-model="last_name"
-                                id="category_name"
+                                id="last_name"
                                 placeholder="Last Name"
                             />
                         </div>
 
                         <div class="mb-3">
-                            <label for="category_description" class="form-label">Position</label>
+                            <label for="position" class="form-label">Position</label>
                             <input
                                 type="text"
                                 class="form-control"
                                 v-model="position"
-                                id="category_description"
+                                id="position"
                                 placeholder="Position"
+
+                            />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input
+                                type="email"
+                                class="form-control"
+                                v-model="email"
+                                id="email"
+                                placeholder="Email"
 
                             />
                         </div>
@@ -76,7 +88,7 @@ export default {
             first_name: '',
             last_name: '',
             position: '',
-            categoryDescription: '',
+            email: '',
             active: true,
         }
     },
@@ -91,12 +103,14 @@ export default {
                 first_name: this.first_name,
                 last_name: this.last_name,
                 position: this.position,
+                email: this.email,
                 active: this.active,
 
             }).then(() => {
                 this.first_name = '';
                 this.last_name = '';
                 this.position = '';
+                this.email = '';
 
 
             }).catch(error => {
