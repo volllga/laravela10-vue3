@@ -1,18 +1,25 @@
 <template>
     <div class="container">
-        Employee
+        <button class="btn btn-primary" style="float: right" @click.prevent="createEmployee">Add Employee</button>
     </div>
-    <create></create>
-    <categories ref="categories"></categories>
+    <div class="container">
+        <h2>Employees</h2>
+    </div>
+    <employees ref="employees"></employees>
 </template>
 
 <script>
-import Categories from "@/components/Category/Categories.vue";
-import Create from "@/components/Category/Create.vue";
+import Employees from "@/components/Employee/Employees.vue";
+import CreateEmployee from "@/components/Employee/CreateEmployee.vue";
 
 export default {
     name: "Employee",
-    components: {Create, Categories},
+    components: {CreateEmployee, Employees},
+    methods: {
+        createEmployee() {
+            this.$router.push({ name: 'employee.create' });
+        }
+    }
 
 }
 </script>

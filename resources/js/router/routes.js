@@ -25,6 +25,10 @@ const routes = [
         path: '/employees', component: () => import('../components/Employee/Employee.vue'),
         name: 'employee'
     },
+    {
+        path: '/employees/create', component: () => import('../components/Employee/CreateEmployee.vue'),
+        name: 'employee.create'
+    },
 ]
 
 export default routes

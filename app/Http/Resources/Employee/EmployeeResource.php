@@ -17,8 +17,9 @@ class EmployeeResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'category_name' => $this->category_name,
-            'category_description' => $this->category_description,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'position' => $this->position,
             'active' => $this->active,
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::parse($this->updated_at)->format('Y-m-d H:i:s'),
