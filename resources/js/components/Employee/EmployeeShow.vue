@@ -22,6 +22,8 @@
 <!--            <div>Hire Date: {{ employee.hire_date }}</div>-->
 <!--            <div>Termination Date: {{ employee.termination_date }}</div>-->
 <!--            <div>Notes: {{ employee.notes }}</div>-->
+            <div>Created at: {{ employee.created_at }}</div>
+            <div>Updated at: {{ employee.updated_at }}</div>
             <router-link :to="{ name: 'employee.edit', params: { id: employee.id }}">Edit</router-link>
         </div>
         <div v-else>
