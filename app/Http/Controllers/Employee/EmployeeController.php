@@ -21,7 +21,7 @@ class EmployeeController extends Controller
         return new EmployeeResource($employee);
     }
 
-    public function store(EmployeeRequest $request)
+    public function create(EmployeeRequest $request)
     {
         try {
             $employee = Employee::create($request->validated());
