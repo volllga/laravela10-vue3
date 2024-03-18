@@ -3,7 +3,11 @@
         <th scope="row"><router-link :to="{ name: 'category.show', params:{id: item.id}}">{{ item.id }}</router-link></th>
         <td>{{ item.category_name }}</td>
         <td>{{ item.category_description }}</td>
-        <td>{{ item.active }}</td>
+        <td>
+            <span :class="{'badge rounded-pill text-bg-success': item.active, 'badge rounded-pill text-bg-secondary': !item.active}">
+                                {{ item.active ? 'Active' : 'Inactive' }}
+            </span>
+        </td>
         <td>{{ item.created_at }}</td>
         <td>{{ item.updated_at }}</td>
         <td>
