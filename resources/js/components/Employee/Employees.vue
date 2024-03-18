@@ -8,8 +8,8 @@
                 <th scope="col">Employee</th>
                 <th scope="col">Active</th>
                 <th scope="col">Position</th>
+                <th scope="col">Email</th>
                 <th scope="col">Created at</th>
-                <th scope="col">Updated at</th>
                 <th scope="col" style="width: 120px">Actions</th>
             </tr>
             </thead>
@@ -23,8 +23,8 @@
                 <td>{{ item.first_name + ' ' + item.last_name}}</td>
                 <td>{{ item.active }}</td>
                 <td>{{ item.position }}</td>
+                <td>{{ item.email }}</td>
                 <td>{{ item.created_at }}</td>
-                <td>{{ item.updated_at }}</td>
                 <td>
                     <a href="#" class="btn btn-outline-primary btn-sm" @click.prevent="$router.push(`/employees/${item.id}/edit`)">
                         <EditAction/>
@@ -76,7 +76,7 @@ export default {
     computed: {
         activeItems() {
             return this.items
-                .filter((item) => item.active === true)
+                // .filter((item) => item.active === true)
         },
 
         items() {

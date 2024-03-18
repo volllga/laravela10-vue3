@@ -46,11 +46,11 @@ export default {
 
         async storeEmployee({ dispatch }, data) {
             try {
-                console.log(data);
                 await axios.post(`/api/employees`, {
                     first_name: data.first_name,
                     last_name: data.last_name,
                     position: data.position,
+                    email: data.email,
                     active: data.active,
                 });
                 dispatch('getEmployees');
@@ -62,13 +62,15 @@ export default {
         async updateEmployee({}, data) {
             try {
                 await axios.patch(`/api/employees/${data.id}`, {
-                    category_name: data.category_name,
-                    category_description: data.category_description,
+                    first_name: data.first_name,
+                    last_name: data.last_name,
+                    position: data.position,
+                    email: data.email,
                     active: data.active,
                 });
-                alert("Category updated successfully!");
+                alert("Employee updated successfully!");
             } catch (error) {
-                handleRequestError(error, 'Failed to update category. Please try again.');
+                handleRequestError(error, 'Failed to update employee. Please try again.');
             }
         },
 

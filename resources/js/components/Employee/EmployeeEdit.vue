@@ -62,8 +62,8 @@
                         <button class="btn btn-secondary" @click="goBack">< Back</button>
                         <span>&nbsp;</span>
                         <button
-                            :disabled="!isDisabled"
-                            @click.prevent="handleSubmit"
+                            :disabled="isDisabled"
+                            @click.prevent="updateEmployee"
                             type="submit"
                             class="btn btn-primary"
                         >Submit</button>
@@ -77,17 +77,14 @@
 <script>
 
 
+import router from "../../router/router.js";
+
 export default {
     name: "EmployeeEdit",
     data() {
         return {
-            validationErrors: null,
-            first_name: '',
-            last_name: '',
-            position: '',
-            email: '',
-            active: true,
-        }
+            employeeId: null
+        };
     },
 
     mounted() {
@@ -96,36 +93,32 @@ export default {
     },
     computed: {
         isDisabled() {
-            return this.first_name.trim() && this.last_name.trim();
+            return !this.employee || !this.employee.first_name.trim() || !this.employee.last_name.trim();
         },
         employee() {
             return this.$store.getters.employee
         }
     },
     methods: {
-        handleSubmit() {
-            this.$store.dispatch('storeEmployee', {
-                first_name: this.first_name,
-                last_name: this.last_name,
-                position: this.position,
-                email: this.email,
-                active: this.active,
-
-            }).then(() => {
-                this.first_name = '';
-                this.last_name = '';
-                this.position = '';
-                this.email = '';
-
-
-            }).catch(error => {
-                console.error(error);
-                if (error.response && error.response.status === 422) {
-                    this.validationErrors = error.response.data.errors;
-                } else {
-                    alert("Failed to create category. Please try again.")
-                }
+        updateEmployee() {
+            if (!this.employee) return; // Handle edge case where category is not loaded
+            const {
+                id,
+                first_name,
+                last_name,
+                position,
+                email,
+                active,
+            } = this.employee;
+            this.$store.dispatch('updateEmployee', {
+                id,
+                first_name,
+                last_name,
+                position,
+                email,
+                active,
             });
+            router.push({name: 'employee.show', params: {id: this.employee.id}});
         },
 
         goBack() {

@@ -3,6 +3,7 @@
         <h1>{{ title }}</h1>
         <div v-if="employee">
             <div>ID: {{ employee.id }}</div>
+            <div>Active: {{ employee.active }}</div>
             <div>First Name: {{ employee.first_name }}</div>
             <div>Last Name: {{ employee.last_name }}</div>
 <!--            <div>Document: {{ employee.document }}</div>-->

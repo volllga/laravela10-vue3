@@ -31,9 +31,14 @@ class EmployeeController extends Controller
         }
     }
 
-    public function update()
+    public function update(EmployeeRequest $request, Employee $employee)
     {
-
+        try {
+            $employee->update($request->validated());
+            return $employee;
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to update employee', 'message' => $e->getMessage()], 500);
+        }
     }
 
     public function destroy()
