@@ -3,7 +3,11 @@
         <h1>{{ title }}</h1>
         <div v-if="employee">
             <div>ID: {{ employee.id }}</div>
-            <div>Active: {{ employee.active }}</div>
+            <div>
+                <span :class="{'badge rounded-pill text-bg-success': employee.active, 'badge rounded-pill text-bg-secondary': !employee.active}">
+                                {{ employee.active ? 'Active' : 'Inactive' }}
+                </span>
+            </div>
             <div>First Name: {{ employee.first_name }}</div>
             <div>Last Name: {{ employee.last_name }}</div>
 <!--            <div>Document: {{ employee.document }}</div>-->
@@ -24,6 +28,8 @@
 <!--            <div>Notes: {{ employee.notes }}</div>-->
             <div>Created at: {{ employee.created_at }}</div>
             <div>Updated at: {{ employee.updated_at }}</div>
+            <a href="#" @click.prevent="this.$router.go(-1);">&lt; Back</a>
+            <span>&nbsp;&nbsp;&nbsp;</span>
             <router-link :to="{ name: 'employee.edit', params: { id: employee.id }}">Edit</router-link>
         </div>
         <div v-else>
