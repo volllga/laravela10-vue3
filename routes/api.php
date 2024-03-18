@@ -32,7 +32,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Category', 'prefix' => 'categ
 Route::group(['namespace' => 'App\Http\Controllers\Employee', 'prefix' => 'employees'], function () {
     Route::get('/', [EmployeeController::class, 'index']);
     Route::get('/{employee}', [EmployeeController::class, 'show']);
-    Route::post('/', [EmployeeController::class, 'create']);
+    Route::post('/', [EmployeeController::class, 'store']);
     Route::patch('/{employee}', [EmployeeController::class, 'update']);
     Route::delete('/{employee}', [EmployeeController::class, 'destroy']);
 });
