@@ -17,6 +17,8 @@
             </div>
         </div>
         <br>
+        <button class="btn btn-secondary" @click.prevent="this.$router.go(-1);">&lt; Back</button>
+        <span>&nbsp;</span>
         <button type="button" @click.prevent="updateCategory" class="btn btn-primary" :disabled="isDisabled">Submit</button>
     </div>
 </template>
