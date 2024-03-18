@@ -21,7 +21,11 @@
                     </router-link>
                 </td>
                 <td>{{ item.first_name + ' ' + item.last_name}}</td>
-                <td>{{ item.active }}</td>
+                <td>
+                    <span :class="{'badge rounded-pill text-bg-success': item.active, 'badge rounded-pill text-bg-secondary': !item.active}">
+                                {{ item.active ? 'Active' : 'Inactive' }}
+                            </span>
+                </td>
                 <td>{{ item.position }}</td>
                 <td>{{ item.email }}</td>
                 <td>{{ item.created_at }}</td>
