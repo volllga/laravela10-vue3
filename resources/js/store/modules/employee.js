@@ -78,9 +78,9 @@ export default {
             try {
                 await axios.delete(`/api/employees/${id}`, {});
                 dispatch('getEmployees');
-                alert("Category deleted successfully!");
+                alert("Employee deleted successfully!");
             } catch (error) {
-                handleRequestError(error, 'Failed to delete category. Please try again.');
+                handleRequestError(error, 'Failed to delete employee. Please try again.');
             }
         },
     },

@@ -34,7 +34,7 @@
                         <EditAction/>
                     </a>
                     <span>&nbsp;</span>
-                    <a href="#" class="btn btn-outline-danger btn-sm" @click.prevent="$store.dispatch('destroy', item.id)">
+                    <a href="#" class="btn btn-outline-danger btn-sm" @click.prevent="$store.dispatch('destroyEmployee', item.id)">
                         <DeleteAction/>
                     </a>
                 </td>
@@ -56,8 +56,6 @@
 
 import EditAction from "../actions/EditAction.vue";
 import DeleteAction from "../actions/DeleteAction.vue";
-// import Edit from "@/components/Category/Edit.vue";
-// import Show from "@/components/Category/Show.vue";
 
 export default {
     name: 'Employees',
@@ -67,8 +65,6 @@ export default {
 
         EditAction,
         DeleteAction,
-        // Edit,
-        // Show
     },
 
     data() {
