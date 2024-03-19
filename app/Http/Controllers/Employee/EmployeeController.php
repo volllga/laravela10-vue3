@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Employee\EmployeeRequest;
+use App\Http\Requests\Employee\PatchEmployeeRequest;
+use App\Http\Requests\Employee\PostEmployeeRequest;
 use App\Http\Resources\Employee\EmployeeResource;
 use App\Models\Employee;
 
@@ -21,7 +22,7 @@ class EmployeeController extends Controller
         return new EmployeeResource($employee);
     }
 
-    public function store(EmployeeRequest $request)
+    public function store(PostEmployeeRequest $request)
     {
         try {
             $employee = Employee::create($request->validated());
@@ -31,7 +32,7 @@ class EmployeeController extends Controller
         }
     }
 
-    public function update(EmployeeRequest $request, Employee $employee)
+    public function update(PatchEmployeeRequest $request, Employee $employee)
     {
         try {
             $employee->update($request->validated());

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Category;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Category\CategoryRequest;
+use App\Http\Requests\Category\PatchCategoryRequest;
+use App\Http\Requests\Category\PostCategoryRequest;
 use App\Http\Resources\Category\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class CategoryController extends Controller
 //        return view('categories.create');
 //    }
 //
-    public function store(CategoryRequest $request)
+    public function store(PostCategoryRequest $request)
     {
         try {
 //            dump($request->validated());
@@ -44,7 +45,7 @@ class CategoryController extends Controller
 //        return view('categories.edit', compact('category'));
 //    }
 //
-    public function update(CategoryRequest $request, Category $category)
+    public function update(PatchCategoryRequest $request, Category $category)
     {
         // Validation has passed, update the category
         try {
