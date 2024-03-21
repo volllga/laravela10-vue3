@@ -1,11 +1,13 @@
 <template>
+    <EmployeeFilter></EmployeeFilter>
     <div class="container p-5">
     <div>
         <table class="table table-hover" v-if="items !== null">
             <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Employee</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
                 <th scope="col">Active</th>
                 <th scope="col">Position</th>
                 <th scope="col">Email</th>
@@ -20,7 +22,8 @@
                         {{ item.id }}
                     </router-link>
                 </td>
-                <td>{{ item.first_name + ' ' + item.last_name}}</td>
+                <td>{{ item.first_name }}</td>
+                <td>{{ item.last_name}}</td>
                 <td>
                     <span :class="{'badge rounded-pill text-bg-success': item.active, 'badge rounded-pill text-bg-secondary': !item.active}">
                                 {{ item.active ? 'Active' : 'Inactive' }}
@@ -53,18 +56,19 @@
 
 
 <script>
-
 import EditAction from "../actions/EditAction.vue";
 import DeleteAction from "../actions/DeleteAction.vue";
+import EmployeeFilter from "./EmployeeFilter.vue";
 
 export default {
     name: 'Employees',
     props: ['item'],
 
     components: {
-
+        EmployeeFilter,
         EditAction,
         DeleteAction,
+
     },
 
     data() {
@@ -76,7 +80,7 @@ export default {
     computed: {
         activeItems() {
             return this.items
-                // .filter((item) => item.active === true)
+            // .filter((item) => item.active === true)
         },
 
         items() {
@@ -85,13 +89,26 @@ export default {
     },
 
     mounted() {
-        this.$store.dispatch('getEmployees')
+        this.fetchEmployees();
     },
 
     methods: {
+        fetchEmployees(filters = null) {
+            if (filters) {
+                this.$store.dispatch('getFilteredEmployees', filters);
+            } else {
+                this.$store.dispatch('getEmployees');
+            }
+        },
+
         isEdit(id) {
             return this.editItemId === id
         },
+
+        applyFilter(filters) {
+            this.fetchEmployees(filters);
+        }
     },
 }
 </script>
+

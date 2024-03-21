@@ -34,6 +34,15 @@ export default {
             }
         },
 
+        async getFilteredEmployees({ commit }, filters) {
+            try {
+                const resp = await axios.get('api/employees', { params: filters });
+                commit('setEmployees', resp.data.data);
+            } catch (error) {
+                handleRequestError(error, 'Error fetching filtered items:');
+            }
+        },
+
         async getEmployee({ commit }, id) {
             try {
                 const resp = await axios.get(`/api/employees/${id}`);
