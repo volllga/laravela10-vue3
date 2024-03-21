@@ -45,10 +45,8 @@
                                 v-model="email"
                                 id="email"
                                 placeholder="Email"
-
                             />
                         </div>
-
                         <div class="mb-3 form-check">
                             <input
                                 type="checkbox"

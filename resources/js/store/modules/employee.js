@@ -87,10 +87,12 @@ export default {
 }
 
 function handleRequestError(error, defaultMessage) {
-    console.error(error);
+    // console.error(error);
     if (error.response && error.response.status === 422) {
         const validationErrors = error.response.data.errors;
-        console.error(validationErrors);
+        console.error("***", validationErrors);
+        alert("Failed to create employee")
+        return validationErrors
     } else {
         alert(defaultMessage);
     }

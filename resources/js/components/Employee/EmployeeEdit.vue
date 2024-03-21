@@ -56,13 +56,13 @@
                             />
                             <label class="form-check-label" for="active">Active</label>
                         </div>
-                        <button class="btn btn-secondary" @click="goBack">&lt; Back</button>
-                        <span>&nbsp;</span>
+                        <button class="btn btn-secondary m-lg-1" @click="goBack">&lt; Back</button>
+<!--                        <span>&nbsp;</span>-->
                         <button
                             :disabled="isDisabled"
                             @click.prevent="updateEmployee"
                             type="submit"
-                            class="btn btn-primary"
+                            class="btn btn-primary m-lg-1"
                         >Submit</button>
                     </div>
                 </div>
