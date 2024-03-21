@@ -14,6 +14,9 @@
                 <li class="breadcrumb-item">
                     <router-link :to="{ name: 'employee' }" class="breadcrumb">Employees</router-link>
                 </li>
+                <li class="breadcrumb-item">
+                    <router-link :to="{ name: 'invoice' }" class="breadcrumb">Invoices</router-link>
+                </li>
             </ol>
         </nav>
         <router-view></router-view>
