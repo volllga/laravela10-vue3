@@ -18,7 +18,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'ForCrew') }}
@@ -30,7 +30,21 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        <li class="breadcrumb" style="padding-left: 20px">
+                            <router-link to="/home" class="breadcrumb-item">Home</router-link>
+                        </li>
+                        <li class="breadcrumb" style="padding-left: 20px">
+                            <router-link to="/first" class="breadcrumb-item">First</router-link>
+                        </li>
+                        <li class="breadcrumb" style="padding-left: 20px">
+                            <router-link :to="{ name: 'category.index' }" class="breadcrumb-item">Categories</router-link>
+                        </li>
+                        <li class="breadcrumb" style="padding-left: 20px">
+                            <router-link :to="{ name: 'employee' }" class="breadcrumb-item">Employees</router-link>
+                        </li>
+                        <li class="breadcrumb" style="padding-left: 20px">
+                            <router-link :to="{ name: 'invoice' }" class="breadcrumb-item">Invoices</router-link>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -58,7 +72,7 @@
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                    document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -70,6 +84,7 @@
                         @endguest
                     </ul>
                 </div>
+
             </div>
         </nav>
 
