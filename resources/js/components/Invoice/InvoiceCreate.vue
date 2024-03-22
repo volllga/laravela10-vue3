@@ -7,14 +7,19 @@
                     <div class="card-body">
 
                         <div class="mb-3">
-                            <label for="number" class="form-label">Invoice Number *</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                v-model="number"
-                                id="number"
-                                placeholder="Invoice Number"
-                            />
+                            <label for="number" class="form-label d-block">Invoice Number *</label>
+                            <div class="d-flex align-items-center">
+                                <span class="me-2">FA/</span>
+                                <input
+                                    type="number"
+                                    class="form-control me-1"
+                                    style="width: 110px;"
+                                    v-model="userInput"
+                                    id="number"
+                                    placeholder="Number"
+                                />
+                                <span>/{{ this.currentMonth }}/{{ this.currentYear }}</span>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="date" class="form-label">Date of issue</label>
@@ -87,31 +92,39 @@ export default {
     data() {
         return {
             validationErrors: null,
-            number: 'FA/1/03/2024',
+            userInput: '1',
+
+
             // status: '',
             amount: '3500',
             date: new Date().toISOString().substr(0, 10),
             service_date: new Date().toISOString().substr(0, 10),
             due_date: new Date().toISOString().substr(0, 10),
+            currentMonth: ('0' + (new Date().getMonth() + 1)).slice(-2),
+            currentYear: new Date().getFullYear(),
             // active: true,
         }
     },
     computed: {
         isDisabled() {
-            return this.number.trim();
+            return this.userInput && this.amount;
         },
+
+        invoiceNumber() {
+            return `FA/${this.userInput}/${this.currentMonth}/${this.currentYear}`;
+        }
     },
     methods: {
         handleSubmit() {
             this.$store.dispatch('storeInvoice', {
-                number: this.number,
+                number: this.invoiceNumber,
                 date: this.date,
                 service_date: this.service_date,
                 due_date: this.due_date,
                 amount: this.amount,
 
             }).then(() => {
-                this.number = '';
+                this.userInput = '';
                 this.amount = '';
 
 

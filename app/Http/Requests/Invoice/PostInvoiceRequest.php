@@ -37,6 +37,7 @@ class PostInvoiceRequest extends FormRequest
                 }),
                 'string',
             ],
+            'amount' => 'required|string',
             'date' => 'required|string',
             'service_date' => 'required|string',
             'due_date' => 'required|string',
