@@ -17,18 +17,13 @@ class Invoice extends Model
         'date' => 'date:Y-m-d',
         'service_date' => 'date:Y-m-d',
         'due_date' => 'date:Y-m-d',
-        'created_at' => 'datetime:Y-m-d H:i:s',
-        'updated_at' => 'datetime:Y-m-d H:i:s',
-        'deleted_at' => 'datetime:Y-m-d H:i:s',
+        'created_at' => 'date:Y-m-d',
+        'updated_at' => 'date:Y-m-d',
+        'deleted_at' => 'date:Y-m-d',
         'amount' => 'decimal:12,2',
         'currency' => 'string',
         'secondary_currency' => 'string',
     ];
-
-    public function status()
-    {
-        return $this->belongsTo(InvoiceStatus::class, 'status_id');
-    }
 
 //    public function company()
 //    {

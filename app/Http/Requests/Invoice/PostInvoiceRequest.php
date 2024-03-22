@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Invoice;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PostInvoiceRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class PostInvoiceRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +22,36 @@ class PostInvoiceRequest extends FormRequest
      */
     public function rules(): array
     {
+        $invoiceId = $this->route('invoice') ? $this->route('invoice')->id : null;
+
         return [
-            //
+            'number' => [
+                'required',
+                Rule::unique('invoices')->where(function ($query) use ($invoiceId) {
+                    $query->whereNull('deleted_at');
+
+                    // Exclude the current category ID if it exists (for updates)
+                    if ($invoiceId !== null) {
+                        $query->where('id', '!=', $invoiceId);
+                    }
+                }),
+                'string',
+            ],
+            'date' => 'required|string',
+            'service_date' => 'required|string',
+            'due_date' => 'required|string',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'number.required' => 'The number is required.',
+            'number.unique' => 'The number must be unique.',
+            'date.string' => 'The category name must be a string.',
+            'service_date.string' => 'The category name must be a string.',
+            'due_date.string' => 'The category name must be a string.',
+
         ];
     }
 }

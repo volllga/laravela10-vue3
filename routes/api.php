@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Employee\EmployeeController;
+use App\Http\Controllers\Invoice\InvoiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,4 +36,12 @@ Route::group(['namespace' => 'App\Http\Controllers\Employee', 'prefix' => 'emplo
     Route::post('/', [EmployeeController::class, 'store']);
     Route::patch('/{employee}', [EmployeeController::class, 'update']);
     Route::delete('/{employee}', [EmployeeController::class, 'destroy']);
+});
+
+Route::group(['namespace' => 'App\Http\Controllers\Invoice', 'prefix' => 'invoices'], function () {
+    Route::get('/', [InvoiceController::class, 'index']);
+    Route::get('/{invoice}', [InvoiceController::class, 'show']);
+    Route::post('/', [InvoiceController::class, 'store']);
+    Route::patch('/{invoice}', [InvoiceController::class, 'update']);
+    Route::delete('/{invoice}', [InvoiceController::class, 'destroy']);
 });

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Invoice;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Invoice\PostInvoiceRequest;
+use App\Http\Resources\Invoice\InvoiceResource;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
 
@@ -13,7 +15,9 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        //
+        $invoices = Invoice::all();
+
+        return InvoiceResource::collection($invoices);
     }
 
     /**
@@ -27,9 +31,16 @@ class InvoiceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PostInvoiceRequest $request)
     {
-        //
+        try {
+            dump($request->validated());
+            $invoice = Invoice::create($request->validated());
+            return new InvoiceResource($invoice);
+        } catch (\Exception $e) {
+            dump($e);
+            return response()->json(['error' => 'Failed to create invoice ***'], 500);
+        }
     }
 
     /**
