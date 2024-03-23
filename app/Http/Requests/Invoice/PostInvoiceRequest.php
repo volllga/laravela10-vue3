@@ -26,18 +26,14 @@ class PostInvoiceRequest extends FormRequest
 
         return [
             'number' => [
+                'sometimes',
                 'required',
-                Rule::unique('invoices')->where(function ($query) use ($invoiceId) {
-                    $query->whereNull('deleted_at');
-
-                    // Exclude the current category ID if it exists (for updates)
-                    if ($invoiceId !== null) {
-                        $query->where('id', '!=', $invoiceId);
-                    }
-                }),
                 'string',
+                'max:255',
+                Rule::unique('invoices', 'number')->ignore($invoiceId)->whereNull('deleted_at'),
             ],
-            'amount' => 'required|string',
+
+            'amount' => 'nullable|numeric|min:0|max:9999999999.99',
             'date' => 'required|string',
             'service_date' => 'required|string',
             'due_date' => 'required|string',

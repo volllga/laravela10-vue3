@@ -61,7 +61,7 @@
                         <div class="mb-3">
                             <label for="amount" class="form-label">Invoice Amount</label>
                             <input
-                                type="number"
+                                type="text"
                                 class="form-control"
                                 v-model="amount"
                                 id="amount"

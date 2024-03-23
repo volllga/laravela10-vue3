@@ -20,7 +20,7 @@ class Invoice extends Model
         'created_at' => 'date:Y-m-d',
         'updated_at' => 'date:Y-m-d',
         'deleted_at' => 'date:Y-m-d',
-        'amount' => 'decimal:12,2',
+        'amount' => 'float:2',
         'currency' => 'string',
         'secondary_currency' => 'string',
     ];
