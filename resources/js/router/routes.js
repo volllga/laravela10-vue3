@@ -3,8 +3,22 @@ const routes = [
         path: '/home', component: () => import('../components/Home.vue'),
     },
     {
-        path: '/first', component: () => import('../components/FirstComponent.vue'),
+        path: '/customers', component: () => import('../components/Customer/Customer.vue'),
+        name: 'customer'
     },
+    {
+        path: '/customers/create', component: () => import('../components/Customer/CustomerCreate.vue'),
+        name: 'customer.create'
+    },
+    {
+        path: '/customers/:id', component: () => import('../components/Customer/CustomerShow.vue'),
+        name: 'customer.show'
+    },
+    {
+        path: '/customers/:id/edit', component: () => import('../components/Customer/CustomerEdit.vue'),
+        name: 'customer.edit'
+    },
+
     {
         path: '/categories', component: () => import('../components/Category/CategoryIndex.vue'),
         name: 'category.index'
