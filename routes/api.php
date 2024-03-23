@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Category\CategoryController;
+use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Employee\EmployeeController;
 use App\Http\Controllers\Invoice\InvoiceController;
 use Illuminate\Http\Request;
@@ -44,4 +45,12 @@ Route::group(['namespace' => 'App\Http\Controllers\Invoice', 'prefix' => 'invoic
     Route::post('/', [InvoiceController::class, 'store']);
     Route::patch('/{invoice}', [InvoiceController::class, 'update']);
     Route::delete('/{invoice}', [InvoiceController::class, 'destroy']);
+});
+
+Route::group(['namespace' => 'App\Http\Controllers\Customer', 'prefix' => 'customers'], function () {
+    Route::get('/', [CustomerController::class, 'index']);
+    Route::get('/{customer}', [CustomerController::class, 'show']);
+    Route::post('/', [CustomerController::class, 'store']);
+    Route::patch('/{customer}', [CustomerController::class, 'update']);
+    Route::delete('/{customer}', [CustomerController::class, 'destroy']);
 });
