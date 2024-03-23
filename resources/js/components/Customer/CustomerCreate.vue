@@ -121,7 +121,6 @@ export default {
     },
     methods: {
         handleSubmit() {
-            console.log(this.customer)
             this.$store.dispatch('storeCustomer', this.customer)
                 .then(() => {
                     this.customer = {
