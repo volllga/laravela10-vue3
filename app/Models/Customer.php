@@ -14,12 +14,6 @@ class Customer extends Model
     protected $table = 'customers';
     protected $guarded = [];
 
-    protected $casts = [
-
-        'created_at' => 'date:Y-m-d',
-        'updated_at' => 'date:Y-m-d',
-        'deleted_at' => 'date:Y-m-d',
-    ];
 
     protected function companyName(): Attribute
     {
