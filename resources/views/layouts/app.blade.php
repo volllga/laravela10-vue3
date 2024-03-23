@@ -34,7 +34,7 @@
                             <router-link to="/home" class="breadcrumb-item">Home</router-link>
                         </li>
                         <li class="breadcrumb" style="padding-left: 20px">
-                            <router-link to="/first" class="breadcrumb-item">First</router-link>
+                            <router-link :to="{ name: 'customer' }" class="breadcrumb-item">Customers</router-link>
                         </li>
                         <li class="breadcrumb" style="padding-left: 20px">
                             <router-link :to="{ name: 'category.index' }" class="breadcrumb-item">Categories</router-link>
