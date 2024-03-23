@@ -5,15 +5,15 @@
     <div class="container">
         <h2>Customers</h2>
     </div>
-    <invoices ref="invoices"></invoices>
+    <customers ref="customers"></customers>
 </template>
 
 <script>
-import Invoices from "../Customer/Customers.vue";
+import Customers from "../Customer/Customers.vue";
 export default {
     name: "Customer",
 
-    components: {Invoices},
+    components: { Customers },
 
     methods: {
         createCustomer() {
