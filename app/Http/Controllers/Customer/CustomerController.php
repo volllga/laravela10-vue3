@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Customer\PostCustomerRequest;
+use App\Http\Resources\Customer\CustomerResource;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 
@@ -13,7 +15,9 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customers = Customer::all();
+
+        return CustomerResource::collection($customers);
     }
 
     /**
@@ -27,9 +31,16 @@ class CustomerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PostCustomerRequest $request)
     {
-        //
+        try {
+            dump($request->validated());
+            $customer = Customer::create($request->validated());
+            return new CustomerResource($customer);
+        } catch (\Exception $e) {
+            dump($e);
+            return response()->json(['error' => 'Failed to create customer. Controller message'], 500);
+        }
     }
 
     /**
