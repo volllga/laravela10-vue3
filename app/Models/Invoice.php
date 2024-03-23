@@ -30,10 +30,10 @@ class Invoice extends Model
         return number_format($value, 2, '.', ',');
     }
 
-//    public function company()
-//    {
-//        return $this->belongsTo(Company::class, 'company_id');
-//    }
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id');
+    }
 //
 //    public function product()
 //    {

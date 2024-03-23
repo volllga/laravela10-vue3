@@ -39,7 +39,7 @@ class InvoiceController extends Controller
             return new InvoiceResource($invoice);
         } catch (\Exception $e) {
             dump($e);
-            return response()->json(['error' => 'Failed to create invoice ***'], 500);
+            return response()->json(['error' => 'Failed to create invoice. Controller message'], 500);
         }
     }
 
