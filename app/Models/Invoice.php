@@ -25,6 +25,11 @@ class Invoice extends Model
         'secondary_currency' => 'string',
     ];
 
+    public function getAmountAttribute($value)
+    {
+        return number_format($value, 2, '.', ',');
+    }
+
 //    public function company()
 //    {
 //        return $this->belongsTo(Company::class, 'company_id');
