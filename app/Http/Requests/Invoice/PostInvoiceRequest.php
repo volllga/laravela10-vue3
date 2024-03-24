@@ -32,7 +32,7 @@ class PostInvoiceRequest extends FormRequest
                 'max:255',
                 Rule::unique('invoices', 'number')->ignore($invoiceId)->whereNull('deleted_at'),
             ],
-
+            'customer_id' => 'exists:customers,id',
             'amount' => 'nullable|numeric|min:0|max:9999999999.99',
             'date' => 'required|string',
             'service_date' => 'required|string',

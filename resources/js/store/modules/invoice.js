@@ -24,6 +24,7 @@ export default {
     },
 
     actions: {
+
         // commit - обращение к mutations, dispatch - actions
         async getInvoices({ commit }) {
             try {
@@ -57,6 +58,7 @@ export default {
             try {
                 await axios.post(`/api/invoices`, {
                     number: data.number,
+                    customer_id: data.customer_id,
                     date: data.date,
                     service_date: data.service_date,
                     due_date: data.due_date,

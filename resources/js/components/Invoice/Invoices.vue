@@ -31,7 +31,7 @@
                                 {{ item.status ? 'Active' : 'Inactive' }}
                     </span>
                 </td>
-                <td>{{ item.customer }}</td>
+                <td>{{ item.customer_id }}</td>
                 <td>{{ item.amount }}</td>
                 <td>{{ item.vat }}</td>
                 <td>{{ item.date }}</td>

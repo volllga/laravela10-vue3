@@ -13,7 +13,7 @@
                                 <input
                                     type="number"
                                     class="form-control me-1"
-                                    style="width: 110px;"
+                                    style="max-width:95px;"
                                     v-model="userInput"
                                     id="number"
                                     placeholder="Number"
@@ -21,66 +21,78 @@
                                 <span>/{{ this.currentMonth }}/{{ this.currentYear }}</span>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="date" class="form-label">Date of issue</label>
-                            <input
-                                type="date"
-                                class="form-control"
-                                v-model="date"
-                                id="date"
-                            />
-                        </div>
-                        <div class="mb-3">
-                            <label for="service_date" class="form-label">Date of service</label>
-                            <input
-                                type="date"
-                                class="form-control"
-                                v-model="service_date"
-                                id="service_date"
-                            />
-                        </div>
-                        <div class="mb-3">
-                            <label for="due_date" class="form-label">Due date</label>
-                            <input
-                                type="date"
-                                class="form-control"
-                                v-model="due_date"
-                                id="due_date"
-                            />
-                        </div>
-                        <div class="mb-3">
-<!--                            <label for="last_name" class="form-label">Status *</label>-->
-<!--                            <input-->
-<!--                                type="text"-->
-<!--                                class="form-control"-->
-<!--                                v-model="status"-->
-<!--                                id="status"-->
-<!--                                placeholder="Status"-->
-<!--                            />-->
-                        </div>
-                        <div class="mb-3">
-                            <label for="amount" class="form-label">Invoice Amount</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                v-model="amount"
-                                id="amount"
-                                placeholder="Invoice Amount"
-                            />
-                        </div>
 
-                        <button class="btn btn-secondary" @click="goBack">< Back</button>
-                        <span>&nbsp;</span>
-                        <button
-                            :disabled="!isDisabled"
-                            @click.prevent="handleSubmit"
-                            type="submit"
-                            class="btn btn-primary"
-                        >Submit</button>
+                    <div class="mb-3">
+                        <label for="customer_id" class="form-label">Customer</label>
+                        <input
+                            type="number"
+                            class="form-control"
+                            v-model="customer_id"
+                            id="customer_id"
+                            placeholder="Customer"
+                        />
                     </div>
+                    <div class="mb-3">
+                        <label for="date" class="form-label">Date of issue</label>
+                        <input
+                            type="date"
+                            class="form-control"
+                            v-model="date"
+                            id="date"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label for="service_date" class="form-label">Date of service</label>
+                        <input
+                            type="date"
+                            class="form-control"
+                            v-model="service_date"
+                            id="service_date"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label for="due_date" class="form-label">Due date</label>
+                        <input
+                            type="date"
+                            class="form-control"
+                            v-model="due_date"
+                            id="due_date"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <!--                            <label for="last_name" class="form-label">Status *</label>-->
+                        <!--                            <input-->
+                        <!--                                type="text"-->
+                        <!--                                class="form-control"-->
+                        <!--                                v-model="status"-->
+                        <!--                                id="status"-->
+                        <!--                                placeholder="Status"-->
+                        <!--                            />-->
+                    </div>
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Invoice Amount</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            v-model="amount"
+                            id="amount"
+                            placeholder="Invoice Amount"
+                        />
+                    </div>
+
+                    <button class="btn btn-secondary" @click="goBack">< Back</button>
+                    <span>&nbsp;</span>
+                    <button
+                        :disabled="!isDisabled"
+                        @click.prevent="handleSubmit"
+                        type="submit"
+                        class="btn btn-primary"
+                    >Submit
+                    </button>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </template>
 
@@ -93,6 +105,7 @@ export default {
         return {
             validationErrors: null,
             userInput: '1',
+            customer_id: 1,
 
 
             // status: '',
@@ -118,6 +131,7 @@ export default {
         handleSubmit() {
             this.$store.dispatch('storeInvoice', {
                 number: this.invoiceNumber,
+                customer_id: this.customer_id,
                 date: this.date,
                 service_date: this.service_date,
                 due_date: this.due_date,
@@ -125,9 +139,8 @@ export default {
 
             }).then(() => {
                 this.userInput = '';
+                this.customer_id = '';
                 this.amount = '';
-
-
 
             }).catch(error => {
                 console.error(error);
