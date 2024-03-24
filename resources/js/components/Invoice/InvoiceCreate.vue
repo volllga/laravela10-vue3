@@ -30,6 +30,7 @@
                             v-model="customer_id"
                             id="customer_id"
                             placeholder="Customer"
+                            :disabled=true
                         />
                     </div>
                     <div class="mb-3">
