@@ -18,7 +18,6 @@ const routes = [
         path: '/customers/:id/edit', component: () => import('../components/Customer/CustomerEdit.vue'),
         name: 'customer.edit'
     },
-
     {
         path: '/categories', component: () => import('../components/Category/CategoryIndex.vue'),
         name: 'category.index'
@@ -67,7 +66,6 @@ const routes = [
         path: '/invoices/:id/edit', component: () => import('../components/Invoice/InvoiceEdit.vue'),
         name: 'invoice.edit'
     },
-
 ]
 
 export default routes
