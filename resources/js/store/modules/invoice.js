@@ -26,7 +26,8 @@ export default {
     actions: {
 
         // commit - обращение к mutations, dispatch - actions
-        async getInvoices({ commit }) {
+        async getInvoices({ commit })
+            {
             try {
                 const resp = await axios.get('api/invoices');
                 commit('setInvoices', resp.data.data);

@@ -2,7 +2,7 @@
 <!--    <EmployeeFilter></EmployeeFilter>-->
     <div class="container p-5">
     <div>
-        <table class="table table-hover" v-if="items !== null">
+        <table class="table table-hover" v-if="invoices !== null">
             <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -17,40 +17,40 @@
                 <th scope="col" style="width: 120px">Actions</th>
             </tr>
             </thead>
-            <tbody v-if="items && items.length">
-            <tr v-for="item in activeItems" :key="item.id">
+            <tbody v-if="invoices && invoices.length">
+            <tr v-for="invoice in activeItems" :key="invoice.id">
                 <td>
-                    <router-link :to="{ name: 'invoice.show', params:{id: item.id}}">
-                        {{ item.id }}
+                    <router-link :to="{ name: 'invoice.show', params:{id: invoice.id}}">
+                        {{ invoice.id }}
                     </router-link>
                 </td>
-                <td>{{ item.number }}</td>
+                <td>{{ invoice.number }}</td>
 
                 <td>
-                    <span :class="{'badge rounded-pill text-bg-success': item.status, 'badge rounded-pill text-bg-secondary': !item.status}">
-                                {{ item.status ? 'Active' : 'Inactive' }}
+                    <span :class="{'badge rounded-pill text-bg-success': invoice.status, 'badge rounded-pill text-bg-secondary': !invoice.status}">
+                                {{ invoice.status ? 'Active' : 'Inactive' }}
                     </span>
                 </td>
-                <td>{{ item.customer_id }}</td>
-                <td>{{ item.amount }}</td>
-                <td>{{ item.vat }}</td>
-                <td>{{ item.date }}</td>
-                <td>{{ item.service_date }}</td>
-                <td>{{ item.due_date }}</td>
+                <td>{{ invoice.customer_id }}</td>
+                <td>{{ invoice.amount }}</td>
+                <td>{{ invoice.vat }}</td>
+                <td>{{ invoice.date }}</td>
+                <td>{{ invoice.service_date }}</td>
+                <td>{{ invoice.due_date }}</td>
 
                 <td>
-                    <a href="#" class="btn btn-outline-primary btn-sm" @click.prevent="$router.push(`/invoices/${item.id}/edit`)">
+                    <a href="#" class="btn btn-outline-primary btn-sm" @click.prevent="$router.push(`/invoices/${invoice.id}/edit`)">
                         <EditAction/>
                     </a>
                     <span>&nbsp;</span>
-                    <a href="#" class="btn btn-outline-danger btn-sm" @click.prevent="$store.dispatch('destroyInvoice', item.id)">
+                    <a href="#" class="btn btn-outline-danger btn-sm" @click.prevent="$store.dispatch('destroyInvoice', invoice.id)">
                         <DeleteAction/>
                     </a>
                 </td>
             </tr>
             </tbody>
         </table>
-        <div v-else-if="!items">
+        <div v-else-if="!invoices">
             Loading...
         </div>
         <div v-else>
@@ -68,13 +68,12 @@ import DeleteAction from "../actions/DeleteAction.vue";
 
 export default {
     name: 'Invoices',
-    props: ['item'],
+    props: ['invoice'],
 
     components: {
         // EmployeeFilter,
         EditAction,
         DeleteAction,
-
     },
 
     data() {
@@ -85,11 +84,11 @@ export default {
 
     computed: {
         activeItems() {
-            return this.items
-            // .filter((item) => item.active === true)
+            return this.invoices
+            // .filter((invoice) => invoice.active === true)
         },
 
-        items() {
+        invoices() {
             return this.$store.getters.invoices
         },
     },
@@ -113,7 +112,7 @@ export default {
 
         applyFilter(filters) {
             this.fetchInvoices(filters);
-        }
+        },
     },
 }
 </script>
