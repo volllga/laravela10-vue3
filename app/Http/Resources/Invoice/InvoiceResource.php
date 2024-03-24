@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Invoice;
 
+use App\Http\Resources\Customer\CustomerResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Carbon;
@@ -22,7 +23,7 @@ class InvoiceResource extends JsonResource
             'service_date' => Carbon::parse($this->service_date)->format('Y-m-d'),
             'due_date' => Carbon::parse($this->due_date)->format('Y-m-d'),
             'status' => $this->status,
-            'customer_id' => $this->customer_id,
+            'customer' => new CustomerResource($this->whenLoaded('customer')),
             'amount' => $this->amount,
             'vat' => $this->vat,
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),

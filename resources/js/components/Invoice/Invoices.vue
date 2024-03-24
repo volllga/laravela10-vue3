@@ -31,7 +31,7 @@
                                 {{ invoice.status ? 'Active' : 'Inactive' }}
                     </span>
                 </td>
-                <td>{{ invoice.customer_id }}</td>
+                <td>{{ invoice.customer?.company_name || '' }}</td>
                 <td>{{ invoice.amount }}</td>
                 <td>{{ invoice.vat }}</td>
                 <td>{{ invoice.date }}</td>

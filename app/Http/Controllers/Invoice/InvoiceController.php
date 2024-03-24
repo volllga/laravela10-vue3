@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Invoice;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Invoice\PostInvoiceRequest;
 use App\Http\Resources\Invoice\InvoiceResource;
+use App\Models\Customer;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $invoices = Invoice::all();
+
+        $invoices = Invoice::with('customer')->get();
 
         return InvoiceResource::collection($invoices);
     }
