@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Customer\PatchCustomerRequest;
 use App\Http\Requests\Customer\PostCustomerRequest;
 use App\Http\Resources\Customer\CustomerResource;
 use App\Models\Customer;
@@ -48,7 +49,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        return new CustomerResource($customer);
     }
 
     /**
@@ -62,9 +63,14 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Customer $customer)
+    public function update(PatchCustomerRequest $request, Customer $customer)
     {
-        //
+        try {
+            $customer->update($request->validated());
+            return $customer;
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to update employee', 'message' => $e->getMessage()], 500);
+        }
     }
 
     /**

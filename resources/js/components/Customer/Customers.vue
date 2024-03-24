@@ -34,7 +34,7 @@
                 <td>{{ item.created_at }}</td>
 
                 <td>
-                    <a href="#" class="btn btn-outline-primary btn-sm" @click.prevent="$router.push(`/invoices/${item.id}/edit`)">
+                    <a href="#" class="btn btn-outline-primary btn-sm" @click.prevent="$router.push(`/customers/${item.id}/edit`)">
                         <EditAction/>
                     </a>
                     <span>&nbsp;</span>

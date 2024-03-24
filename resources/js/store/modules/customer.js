@@ -46,6 +46,7 @@ export default {
         async getCustomer({ commit }, id) {
             try {
                 const resp = await axios.get(`/api/customers/${id}`);
+
                 commit('setCustomer', resp.data.data);
             } catch (error) {
                 commit('setCustomer', null);
@@ -78,13 +79,20 @@ export default {
         async updateCustomer({}, data) {
             try {
                 await axios.patch(`/api/customers/${data.id}`, {
-                    first_name: data.first_name,
-                    last_name: data.last_name,
-                    position: data.position,
+                    number: data.number,
+                    date: data.date,
+                    service_date: data.service_date,
+                    due_date: data.due_date,
+                    amount: data.amount,
+                    company_name: data.company_name,
                     email: data.email,
-                    active: data.active,
+                    address: data.address,
+                    city: data.city,
+                    country: data.country,
+                    phone: data.phone,
+                    tax_identifier: data.tax_identifier,
                 });
-                alert("Invoice updated successfully!");
+                alert("Store says: Customer updated successfully!");
             } catch (error) {
                 handleRequestError(error, 'Failed to update customer. Please try again.');
             }
