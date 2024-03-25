@@ -23,7 +23,8 @@ export default {
                     symbol = 'zł';
                     break;
             }
-            return symbol + invoice.amount;
+            const formattedAmount = new Intl.NumberFormat('en-US', { style: 'decimal', minimumFractionDigits: 2 }).format(invoice.amount);
+            return symbol + formattedAmount;
         }
 
     },

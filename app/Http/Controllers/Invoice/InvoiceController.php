@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Invoice;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Invoice\PatchInvoiceRequest;
 use App\Http\Requests\Invoice\PostInvoiceRequest;
 use App\Http\Resources\Invoice\InvoiceResource;
 use App\Models\Customer;
@@ -41,7 +42,7 @@ class InvoiceController extends Controller
             return new InvoiceResource($invoice);
         } catch (\Exception $e) {
             dump($e);
-            return response()->json(['error' => 'Failed to create invoice. Controller message'], 500);
+            return response()->json(['error' => 'Controller says: Failed to create invoice.'], 500);
         }
     }
 
@@ -50,7 +51,7 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
-        //
+        return new InvoiceResource($invoice);
     }
 
     /**
@@ -58,15 +59,20 @@ class InvoiceController extends Controller
      */
     public function edit(Invoice $invoice)
     {
-        //
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Invoice $invoice)
+    public function update(PatchInvoiceRequest $request, Invoice $invoice)
     {
-        //
+        try {
+            $invoice->update($request->validated());
+            return $invoice;
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Controller says: Failed to update invoice.'], 500);
+        }
     }
 
     /**
