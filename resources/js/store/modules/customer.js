@@ -57,11 +57,6 @@ export default {
         async storeCustomer({ dispatch }, data) {
             try {
                 await axios.post(`/api/customers`, {
-                    number: data.number,
-                    date: data.date,
-                    service_date: data.service_date,
-                    due_date: data.due_date,
-                    amount: data.amount,
                     company_name: data.company_name,
                     email: data.email,
                     address: data.address,
@@ -79,11 +74,6 @@ export default {
         async updateCustomer({}, data) {
             try {
                 await axios.patch(`/api/customers/${data.id}`, {
-                    number: data.number,
-                    date: data.date,
-                    service_date: data.service_date,
-                    due_date: data.due_date,
-                    amount: data.amount,
                     company_name: data.company_name,
                     email: data.email,
                     address: data.address,
