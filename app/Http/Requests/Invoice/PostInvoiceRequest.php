@@ -34,6 +34,7 @@ class PostInvoiceRequest extends FormRequest
             ],
             'customer_id' => 'exists:customers,id',
             'amount' => 'nullable|numeric|min:0|max:9999999999.99',
+            'currency' => 'nullable|in:usd,eur,pln',
             'date' => 'required|string',
             'service_date' => 'required|string',
             'due_date' => 'required|string',

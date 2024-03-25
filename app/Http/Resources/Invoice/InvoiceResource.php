@@ -25,6 +25,7 @@ class InvoiceResource extends JsonResource
             'status' => $this->status,
             'customer' => new CustomerResource($this->whenLoaded('customer')),
             'amount' => $this->amount,
+            'currency' => $this->currency,
             'vat' => $this->vat,
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::parse($this->updated_at)->format('Y-m-d H:i:s'),

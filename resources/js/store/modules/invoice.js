@@ -10,6 +10,22 @@ export default {
     getters: {
         invoice: state => state.invoice,
         invoices: state => state.invoices,
+        formatAmount: (invoice) => (invoice) => {
+            let symbol = '';
+            switch (invoice.currency) {
+                case 'usd':
+                    symbol = '$';
+                    break;
+                case 'eur':
+                    symbol = '€';
+                    break;
+                case 'pln':
+                    symbol = 'zł';
+                    break;
+            }
+            return symbol + invoice.amount;
+        }
+
     },
 
     mutations: {
@@ -64,6 +80,8 @@ export default {
                     service_date: data.service_date,
                     due_date: data.due_date,
                     amount: data.amount,
+                    currency: data.currency,
+
                 });
                 dispatch('getInvoices');
             } catch (error) {
@@ -74,11 +92,13 @@ export default {
         async updateInvoice({}, data) {
             try {
                 await axios.patch(`/api/invoices/${data.id}`, {
-                    first_name: data.first_name,
-                    last_name: data.last_name,
-                    position: data.position,
-                    email: data.email,
-                    active: data.active,
+                    number: data.number,
+                    date: data.date,
+                    customer_id: data.customer_id,
+                    service_date: data.service_date,
+                    due_date: data.due_date,
+                    amount: data.amount,
+                    currency: data.currency,
                 });
                 alert("Invoice updated successfully!");
             } catch (error) {

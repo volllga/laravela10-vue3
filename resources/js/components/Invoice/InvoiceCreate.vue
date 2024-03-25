@@ -70,6 +70,7 @@
                         <!--                                placeholder="Status"-->
                         <!--                            />-->
                     </div>
+
                     <div class="mb-3">
                         <label for="amount" class="form-label">Invoice Amount</label>
                         <input
@@ -79,6 +80,15 @@
                             id="amount"
                             placeholder="Invoice Amount"
                         />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="currency" class="form-label">Currency</label>
+                        <select id="currency" class="form-control" v-model="currency">
+                            <option value="usd" selected>USD</option>
+                            <option value="eur">EUR</option>
+                            <option value="pln">PLN</option>
+                        </select>
                     </div>
 
                     <button class="btn btn-secondary" @click="goBack">< Back</button>
@@ -107,16 +117,14 @@ export default {
             validationErrors: null,
             userInput: '1',
             customer_id: 1,
-
-
-            // status: '',
+            currency: 'usd',
+// status: '',
             amount: '3500',
             date: new Date().toISOString().substr(0, 10),
             service_date: new Date().toISOString().substr(0, 10),
             due_date: new Date().toISOString().substr(0, 10),
             currentMonth: ('0' + (new Date().getMonth() + 1)).slice(-2),
             currentYear: new Date().getFullYear(),
-            // active: true,
         }
     },
     computed: {
@@ -137,6 +145,7 @@ export default {
                 service_date: this.service_date,
                 due_date: this.due_date,
                 amount: this.amount,
+                currency: this.currency
 
             }).then(() => {
                 this.userInput = '';
