@@ -31,7 +31,7 @@
                                 {{ invoice.status ? 'Active' : 'Inactive' }}
                     </span>
                 </td>
-                <td>{{ invoice.customer?.company_name || '' }}</td>
+                <td>{{ formatCompanyName(invoice.customer?.company_name) }}</td>
                 <td>{{ invoice.amount }}</td>
                 <td>{{ invoice.vat }}</td>
                 <td>{{ invoice.date }}</td>
@@ -113,6 +113,13 @@ export default {
         applyFilter(filters) {
             this.fetchInvoices(filters);
         },
+
+        formatCompanyName(name) {
+            if (name && name.length > 12) {
+                return name.substring(0, 12) + '...';
+            }
+            return name || '';
+        }
     },
 }
 </script>
