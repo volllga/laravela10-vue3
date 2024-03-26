@@ -14,13 +14,13 @@ export default {
             let symbol = '';
             switch (invoice.currency) {
                 case 'usd':
-                    symbol = '$';
+                    symbol = '$ ';
                     break;
                 case 'eur':
-                    symbol = '€';
+                    symbol = '€ ';
                     break;
                 case 'pln':
-                    symbol = 'zł';
+                    symbol = 'zł ';
                     break;
             }
             const formattedAmount = new Intl.NumberFormat('en-US', { style: 'decimal', minimumFractionDigits: 2 }).format(invoice.amount);
