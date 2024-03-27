@@ -45,6 +45,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Invoice', 'prefix' => 'invoic
     Route::post('/', [InvoiceController::class, 'store']);
     Route::patch('/{invoice}', [InvoiceController::class, 'update']);
     Route::delete('/{invoice}', [InvoiceController::class, 'destroy']);
+    Route::get('/{invoice}/generate-pdf', [InvoiceController::class, 'downloadPdf']);
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\Customer', 'prefix' => 'customers'], function () {

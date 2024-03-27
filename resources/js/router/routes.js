@@ -66,6 +66,10 @@ const routes = [
         path: '/invoices/:id/edit', component: () => import('../components/Invoice/InvoiceEdit.vue'),
         name: 'invoice.edit'
     },
+    // {
+    //     path: '/invoices/:id/generate-pdf', component: () => import('../components/Invoice/InvoiceShow.vue'),
+    //     name: 'invoice.pdf'
+    // },
 ]
 
 export default routes

@@ -8,6 +8,7 @@ use App\Http\Requests\Invoice\PostInvoiceRequest;
 use App\Http\Resources\Invoice\InvoiceResource;
 use App\Models\Customer;
 use App\Models\Invoice;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -51,7 +52,7 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
-        return new InvoiceResource($invoice);
+        return new InvoiceResource($invoice->load('customer'));
     }
 
     /**
@@ -81,5 +82,29 @@ class InvoiceController extends Controller
     public function destroy(Invoice $invoice)
     {
         //
+    }
+
+    public function downloadPdf(Invoice $invoice)
+    {
+
+        $invoice->load('customer');
+
+        $data = [
+            [
+                'number' => $invoice->number,
+                'quantity' => 1,
+                'amount' => $invoice->amount,
+                'customer' => $invoice->customer,
+                'date' => $invoice->date->format('Y-m-d'),
+                'service_date' => $invoice->service_date->format('Y-m-d'),
+                'product_id' => $invoice->product_id,
+            ]
+        ];
+
+        $pdf = Pdf::loadView('pdf', ['data' => $data]);
+
+        return $pdf->download();
+//        return $pdf->stream();
+
     }
 }
