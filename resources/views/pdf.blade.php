@@ -7,6 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Invoice</title>
     <style>
+        * {
+            font-family: 'DejaVu Sans', sans-serif;
+            font-size: 0.85rem;
+        }
+
         h4 {
             margin: 0;
         }
@@ -63,7 +68,7 @@
         .total {
             text-align: right;
             margin-top: 1rem;
-            font-size: 0.875rem;
+            font-size: 0.750rem;
             font-weight: bold;
         }
         .text-right {
@@ -135,13 +140,13 @@
                     (Tworzenie i rozwój oprogramowania)
                 </td>
                 <td>
-                    {{ '$ ' . number_format($item['amount'], 2, '.', ',') }}
+                    {{  $item['currencySymbol'] . ' ' . number_format($item['amount'], 2, '.', ',') }}
                 </td>
                 <td>
                     NP
                 </td>
                 <td class="text-right">
-                    {{ '$ ' . number_format($item['amount'], 2, '.', ',') }}
+                    {{  $item['currencySymbol'] . ' ' . number_format($item['amount'], 2, '.', ',') }}
                 </td>
 
             </tr>
@@ -149,7 +154,7 @@
     </div>
 
     <div class="total">
-        Total: {{ '$ ' . number_format($item['amount'], 2, '.', ',') }}
+        Total: {{ $item['currencySymbol'] . ' ' . number_format($item['amount'], 2, '.', ',') }}
     </div>
 
     <div class="footer margin-top">
