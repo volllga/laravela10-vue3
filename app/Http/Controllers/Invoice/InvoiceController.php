@@ -11,6 +11,7 @@ use App\Models\Invoice;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
+
 class InvoiceController extends Controller
 {
     /**
@@ -89,9 +90,9 @@ class InvoiceController extends Controller
         $invoice->load('customer');
 
         $symbol = match($invoice->currency) {
-            'usd' => '$ ',
-            'eur' => '€ ',
-            'pln' => 'zł ',
+            'usd' => '$',
+            'eur' => '€',
+            'pln' => 'zł',
             default => '',
         };
 
@@ -105,8 +106,10 @@ class InvoiceController extends Controller
                 'service_date' => $invoice->service_date->format('Y-m-d'),
                 'product_id' => $invoice->product_id,
                 'currencySymbol' => $symbol,
+//                'amountInWords' => $words
             ]
         ];
+        dump($data);
 
         $pdf = Pdf::loadView('pdf', ['data' => $data]);
         return $pdf->download("invoice-{$invoice->number}.pdf");
