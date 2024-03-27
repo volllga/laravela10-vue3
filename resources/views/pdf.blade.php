@@ -101,7 +101,7 @@
                     <div>{{ $item['customer']->address }}</div>
                     <div>{{ $item['customer']->city }}</div>
                     <div>{{ $item['customer']->country }}</div>
-                    <div>{{ $item['customer']->email }}</div>
+{{--                    <div>{{ $item['customer']->email }}</div>--}}
                     <div>TIN: {{ $item['customer']->tax_identifier }}</div>
 
                 </td>
@@ -111,7 +111,7 @@
                     <div>Jana Nowaka-Jezioranskiego 6</div>
                     <div>00-001 Warszawa</div>
                     <div>TIN: PL 5214002832</div>
-                    <br>
+{{--                    <br>--}}
                     <br>
 
                 </td>
