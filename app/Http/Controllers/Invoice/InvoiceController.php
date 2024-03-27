@@ -86,8 +86,14 @@ class InvoiceController extends Controller
 
     public function downloadPdf(Invoice $invoice)
     {
-
         $invoice->load('customer');
+
+        $symbol = match($invoice->currency) {
+            'usd' => '$ ',
+            'eur' => '€ ',
+            'pln' => 'zł ',
+            default => '',
+        };
 
         $data = [
             [
@@ -98,13 +104,12 @@ class InvoiceController extends Controller
                 'date' => $invoice->date->format('Y-m-d'),
                 'service_date' => $invoice->service_date->format('Y-m-d'),
                 'product_id' => $invoice->product_id,
+                'currencySymbol' => $symbol,
             ]
         ];
 
         $pdf = Pdf::loadView('pdf', ['data' => $data]);
-
-        return $pdf->download();
-//        return $pdf->stream();
-
+        return $pdf->download("invoice-{$invoice->number}.pdf");
     }
+
 }
