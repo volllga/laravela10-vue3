@@ -71,6 +71,12 @@
             font-size: 0.750rem;
             font-weight: bold;
         }
+
+        .total-words {
+            text-align: right;
+            margin-top: 1rem;
+            font-size: 0.750rem;
+        }
         .text-right {
             text-align: right !important;
         }
@@ -154,7 +160,13 @@
     </div>
 
     <div class="total">
-        Total: {{ $item['currencySymbol'] . ' ' . number_format($item['amount'], 2, '.', ',') }}
+        Total to be Paid: {{ $item['currencySymbol'] . ' ' . number_format($item['amount'], 2, '.', ',') }}
+    </div>
+    <div class="total-words">
+        Say Total in English: {{ $item['amountInWordsEn'] }}
+    </div>
+    <div class="total-words">
+        Say Total in Polish: {{ $item['amountInWordsPl'] }}
     </div>
 
     <div class="footer margin-top">

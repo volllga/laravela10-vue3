@@ -10,6 +10,7 @@ use App\Models\Customer;
 use App\Models\Invoice;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use NumberToWords\NumberToWords;
 
 
 class InvoiceController extends Controller
@@ -88,6 +89,10 @@ class InvoiceController extends Controller
     public function downloadPdf(Invoice $invoice)
     {
         $invoice->load('customer');
+        $currencyAmount =$invoice->amount * 100;
+
+        $wordsEn = NumberToWords::transformCurrency('en', $currencyAmount, $invoice->currency);
+        $wordsPl = NumberToWords::transformCurrency('pl', $currencyAmount, $invoice->currency);
 
         $symbol = match($invoice->currency) {
             'usd' => '$',
@@ -106,10 +111,11 @@ class InvoiceController extends Controller
                 'service_date' => $invoice->service_date->format('Y-m-d'),
                 'product_id' => $invoice->product_id,
                 'currencySymbol' => $symbol,
-//                'amountInWords' => $words
+                'amountInWordsEn' => $wordsEn,
+                'amountInWordsPl' => $wordsPl,
             ]
         ];
-        dump($data);
+//        dump($data);
 
         $pdf = Pdf::loadView('pdf', ['data' => $data]);
         return $pdf->download("invoice-{$invoice->number}.pdf");
